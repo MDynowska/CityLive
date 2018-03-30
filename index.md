@@ -1,11 +1,13 @@
-##Opis:
-Aplikacja CityLive na podstawie lokalizacji gps bêdzie wyœwietla³a atrakcje, które znajduj¹ siê najbli¿ej. 
+ï»¿##Opis projektu:
 
-U¿ytkownik po zalogowaniu bêdzie wybiera³ kategorie 
-atrakcji jakie go interesuj¹ (bêd¹ one zapamiêtywane, tak ¿eby u¿ytkownik nie musia³ ich wybieraæ za ka¿dym razem - oczywiœcie bêdzie istnia³a mo¿liwoœæ ich zmiany).U¿ytkownik bêdzie móg³ dodaæ atrakcje do ulubionych dziêki czemu jeœli znajdzie siê jeszcze raz w okolicy lub mieœcie, aplikacja poka¿e 
-jak dalego od u¿ytkownika znajduje siê jego ulubiona atrakcja. Na liœcie atrakcji znajd¹ siê podstawowe informacje tj. nazwa, krótki opis, ocena u¿ytkowników, godziny otwarcia.
+Aplikacja CityLive na podstawie lokalizacji gps bÄ™dzie wyÅ›wietlaÅ‚a atrakcje, ktÃ³re znajdujÄ… siÄ™ najbliÅ¼ej. UÅ¼ytkownik po zalogowaniu bÄ™dzie wybieraÅ‚ kategorie 
+atrakcji jakie go interesujÄ… (bÄ™dÄ… one zapamiÄ™tywane, tak Å¼eby uÅ¼ytkownik nie musiaÅ‚ ich wybieraÄ‡ za kaÅ¼dym razem - oczywiÅ›cie bÄ™dzie istniaÅ‚a moÅ¼liwoÅ›Ä‡ zmiany tych ustawieÅ„)
+UÅ¼ytkownik bÄ™dzie mÃ³gÅ‚ dodaÄ‡ atrakcje do ulubionych dziÄ™ki czemu jeÅ›li znajdzie siÄ™ jeszcze raz w okolicy lub mieÅ›cie aplikacja pokaÅ¼e 
+jak dalego od uÅ¼ytkownika znajduje siÄ™ jego ulubiona atrakcja. Na liÅ›cie atrakcji znajdÄ… siÄ™ podstawowe informacje tj. nazwa, krÃ³tki opis, ocena uÅ¼ytkownikÃ³w, godziny otwarcia.
 
-##Sk³ad grupy:
+##SkÅ‚ad grupy:
 Magdalena Dynowska
-Piotr S³awek 
+Piotr SÅ‚awek 
+Sebastian Rogala
+Grupa dziekaÅ„ska KrZUIs4011Si
 
