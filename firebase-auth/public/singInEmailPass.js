@@ -23,7 +23,8 @@ function toggleSignIn() {
         // [START authwithemail]
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
             // user = result.user;
-            console.log("Zalogowano jako: " + email)
+            // console.log("Zalogowano jako: " + email)
+            alert("Zalogowano jako: " + email)
             }).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -44,6 +45,15 @@ function toggleSignIn() {
     }
 
     function initApp() {
+        var config = {
+            apiKey: "AIzaSyDtrie9w23IwHBTjv6RsJdOYptna740fY8",
+            authDomain: "fir-tests-504a2.firebaseapp.com",
+            databaseURL: "https://fir-tests-504a2.firebaseio.com",
+            projectId: "fir-tests-504a2",
+            storageBucket: "fir-tests-504a2.appspot.com",
+            messagingSenderId: "440215787226"
+        };
+        firebase.initializeApp(config);
       // firebase.auth().onAuthStateChanged(function(user) {
         // var displayName = user.displayName;
         // var email = user.email;
