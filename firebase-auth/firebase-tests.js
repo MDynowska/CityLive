@@ -17,3 +17,17 @@ function login(email, password) {
             // [END_EXCLUDE]
         });
 };
+
+
+var config = {
+    apiKey: "AIzaSyDtrie9w23IwHBTjv6RsJdOYptna740fY8",
+    authDomain: "fir-tests-504a2.firebaseapp.com",
+    databaseURL: "https://fir-tests-504a2.firebaseio.com",
+    projectId: "fir-tests-504a2",
+    storageBucket: "fir-tests-504a2.appspot.com",
+    messagingSenderId: "440215787226"
+};
+firebase.initializeApp(config);
+
+
+login('dupa@dupa.pl', 'dupa123')
