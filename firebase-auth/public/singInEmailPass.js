@@ -41,7 +41,7 @@ function toggleSignIn() {
             });
         // [END authwithemail]
       }
-      document.getElementById('quickstart-sign-in').disabled = false;
+      // document.getElementById('quickstart-sign-in').disabled = false;
     }
 
     function initApp() {
