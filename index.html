@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/citylive.css" />
+
+		<script src="cordova.js"></script>
+		<link rel="stylesheet" href="css/blue.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/jquery.validate.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>		
+	</head>
+		
+	<body class="ui-page-theme-a">
+    <icon src="img/aplication.png"/>
+
+<!--LOGIN-->
+		<div data-role="page" id="loginPage" style="background-image:url(img/background.jpg)" data-header-title="Login" data-header-menu="false">
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<div class="ui-grid-b ui-responsive">
+					<div class="ui-grid-b">
+						<div class="ui-block-a"></div>
+						<div class="ui-block-b">
+							<img style="width:100%" src="img/aplication.png"/>
+						</div>
+						<div class="ui-block-c"></div>
+					</div>
+				</div>
+				<hr color="#0070c0">
+				<form class="formValidation" data-method="login">
+					<fieldset>
+						E-mail:
+						<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
+						Password:
+						<input id="passwordVal" type="password" name="password" value="mmmmmmmm" placeholder="password" required/>
+						
+						<a href="#mainPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign in</a>
+			
+						<center><a href="#forgotPage" style="color:#0070c0; font-size:12px">Forgot password?</a></center>
+						
+						<hr color="#0070c0">
+						
+						New user
+						<a href="#registrationPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign up</a>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		
+<!--FORGOT PASSWORD-->
+		<div data-role="page" id="forgotPage" style="background-image:url(img/background.jpg)" data-header-title="Forgot password" data-header-menu="false">
+			<div data-role="header">
+				<a href="#loginPage" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+			</div>
+			
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<center style="color:#0070c0"><b>Forgot password?</b></center>
+				<hr color="#0070c0">
+						
+				E-mail:
+				<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
+				<a href="#loginPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Send</a>
+			</div>
+		</div>
+
+<!--REGISTRATION-->
+		<div data-role="page" id="registrationPage" style="background-image:url(img/background.jpg)" data-header-title="Registration" data-header-menu="false">
+			<div data-role="header">
+				<a href="#loginPage" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+			</div>			
+			
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">				
+				<center style="color:#0070c0"><b>Sign up</b></center>
+				<hr color="#0070c0">
+						
+				E-mail:
+				<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
+				Password:
+				<input id="passwordVal" type="password" name="password" value="mmmmmmmm" placeholder="password" required/>
+				Confirm password:
+				<input id="confirmPasswordVal" type="password" name="password" value="mmmmmmmm" placeholder="confirmPassword" required/>
+						
+				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign up</a>
+			</div>
+		</div>
+		
+<!--MAIN PAGE-->
+		<div data-role="page" id="mainPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+			
+			<div data-role="header">
+			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+			</div>
+			
+			<div class="menu">
+			  <ul>
+				<a href="#attractionsPage"><li>Search attractions</li></a>
+				<a href="#"><li>Categories of attractions</li></a>
+				<a href="#"><li>My profile</li></a>
+				<a href="#loginPage"><li><img src="css\icons-png\action-black.png"/>   Log out</li></a>
+			  </ul>
+			</div>  
+		
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<div class="ui-grid-b ui-responsive">
+					<div class="ui-grid-b">
+						<div class="ui-block-a"></div>
+						<div class="ui-block-b">
+							<img style="width:100%" src="img/aplication.png"/>
+						</div>
+						<div class="ui-block-c"></div>
+					</div>
+				</div>
+				<hr color="#0070c0">
+				<a href="#attractionsPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Search attractions</a>
+				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Select category for attractions</a>
+			</div>
+		</div>	
+		
+<!--ATTRACTIONS PAGE-->
+		<div data-role="page" id="attractionsPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+			
+			<div data-role="header">
+				<a href="#mainPage" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+			</div>
+			
+			<div class="menu">
+			  <ul>
+				<a href="#attractionsPage"><li>Search attractions</li></a>
+				<a href="#categoriesPage"><li>Categories of attractions</li></a>
+				<a href="#profilPage"><li>My profile</li></a>
+				<a href="#loginPage"><li><img src="css\icons-png\action-black.png"/>   Log out</li></a>
+			  </ul>
+			</div>  
+		
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<div class="ui-grid-b ui-responsive">
+					<div class="ui-grid-b">
+						<div class="ui-block-a"></div>
+						<div class="ui-block-b">
+							<img style="width:100%" src="img/aplication.png"/>
+						</div>
+						<div class="ui-block-c"></div>
+					</div>
+				</div>
+				<hr color="#0070c0">
+				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Search the nearest attractions</a>
+				<center>or</center>
+				<input id="cityVal" type="text" name="city" value="Attractions in selected city" placeholder="city"/>
+				<br>Tutaj będzie mapa
+			</div>
+		</div>		
+
+<!--CATEGORIES PAGE-->
+		<div data-role="page" id="categoriesPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+			
+			<div data-role="header">
+				<a href="#mainPage" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+			</div>
+			
+			<div class="menu">
+			  <ul>
+				<a href="#attractionsPage"><li>Search attractions</li></a>
+				<a href="#categoriesPage"><li>Categories of attractions</li></a>
+				<a href="#profilePage"><li>My profile</li></a>
+				<a href="#loginPage"><li><img src="css\icons-png\action-black.png"/>   Log out</li></a>
+			  </ul>
+			</div>  
+		
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<br>
+				<br>
+				<center><b style="color:#0070c0">Select your categories of attractions:</b></center>
+				<hr color="#0070c0">
+				<br>
+				<form>
+					<input type="checkbox" name="cinemas" value="cinemas" style="margin: 0 0 0 130px"/>Cinemas
+					<input type="checkbox" name="museums" value="museums" style="margin: 0 0 0 130px"/>Museums
+					<input type="checkbox" name="pools" value="pools" style="margin: 0 0 0 130px"/>Sweaming pools
+					<input type="checkbox" name="restauransts" value="restauransts" style="margin: 0 0 0 130px"/>Restaurants
+				</form>
+				<a href="#mainPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Save</a>
+			</div>
+		</div>
+
+<!--PROFILE PAGE-->
+		<div data-role="page" id="profilePage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+			
+			<div data-role="header">
+				<a href="#mainPage" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+			</div>
+			
+			<div class="menu">
+			  <ul>
+				<a href="#attractionsPage"><li>Search attractions</li></a>
+				<a href="#categoriesPage"><li>Categories of attractions</li></a>
+				<a href="#profilePage"><li>My profile</li></a>
+				<a href="#loginPage"><li><img src="css\icons-png\action-black.png"/>   Log out</li></a>
+			  </ul>
+			</div>  
+		
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<center style="color:#0070c0"><b>My profile</b></center>
+				<hr color="#0070c0">
+						
+				E-mail: adres e-mail		
+				<a href="#passwordPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Change password</a>
+				<hr color="#0070c0">
+				Your categories of attractions:
+				<form>
+					<input type="checkbox" name="cinemas" value="cinemas" style="margin: 0 0 0 130px"/>Cinemas
+					<input type="checkbox" name="museums" value="museums" style="margin: 0 0 0 130px"/>Museums
+					<input type="checkbox" name="pools" value="pools" style="margin: 0 0 0 130px"/>Sweaming pools
+					<input type="checkbox" name="restauransts" value="restauransts" style="margin: 0 0 0 130px"/>Restaurants
+				</form>
+				<a href="#categoriesPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Change categories</a>
+			</div>
+		</div>
+		
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+		<script>
+			$( document ).ready(function() {
+
+			$( ".cross" ).hide();
+			$( ".menu" ).hide();
+			$( ".hamburger" ).click(function() {
+			$( ".menu" ).slideToggle( "slow", function() {
+			$( ".hamburger" ).hide();
+			$( ".cross" ).show();
+			});
+			});
+
+			$( ".cross" ).click(function() {
+			$( ".menu" ).slideToggle( "slow", function() {
+			$( ".cross" ).hide();
+			$( ".hamburger" ).show();
+			});
+			});
+
+			});
+		</script>
+	</body>
+</html>
