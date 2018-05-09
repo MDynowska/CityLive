@@ -8,6 +8,7 @@
         <script>
         function checkGPS () {
             var onSuccess = function(position) {
+                alert("Pobieram GPS")
                 console.log(position.coords.latitude, position.coords.longitude)
             }
             function onError(error) {
