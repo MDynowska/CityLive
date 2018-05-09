@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>GPS</title>
+    </head>
+    <body>
+        <script>
+        function checkGPS () {
+            var onSuccess = function(position) {
+                console.log(position.coords.latitude, position.coords.longitude)
+            }
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                'message: ' + error.message + '\n');
+            }
+
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: Infinity, enableHighAccuracy: false });
+        }
+        // var latLong = new google.maps.LatLng(latitude, longitude);
+        checkGPS();
+        </script>
+    </body>
+</html>
