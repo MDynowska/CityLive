@@ -3,7 +3,7 @@
   position:absolute;
   top:0;
   right:0;
-  line-height:45px;
+  line-height:33px;
   padding:5px 15px 0px 15px;
   color:#999;
   border:0;
@@ -22,7 +22,7 @@
   color:#999;
   border:0;
   font-size:1.4em;
-  line-height:65px;
+  line-height:33px;
   font-weight:bold;
   cursor:pointer;
   outline:none;
