@@ -3,17 +3,29 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CityLive</title>
 
 		<link rel="stylesheet" href="css/citylive.css" />
 
-		<script src="cordova.js"></script>
+		<!-- <script src="cordova.js"></script> -->
 		<link rel="stylesheet" href="css/blue.min.css" />
 		<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
 
-		<script src="js/jquery-2.1.4.min.js"></script>
-		<script src="js/jquery.validate.js"></script>
-		<script src="js/jquery.mobile-1.4.5.min.js"></script>	
+		<script src="js/jquery/jquery-2.1.4.min.js"></script>
+		<script src="js/jquery/jquery.validate.js"></script>
+		<script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+
+		<script src="js/firebase/4.13.0/firebase.js"></script>
+		<script src="js/firebase/4.13.0/firebase-app.js"></script>
+		<script src="js/firebase/4.13.0/firebase-auth.js"></script>
+		<script src="js/firebase/4.13.0/firebase-database.js"></script>
+		<script src="js/firebase/4.13.0/firebase-messaging.js"></script>
+		<script src="js/firebase/4.13.0/firebase-storage.js"></script>
+		<!-- <script defer src="js/app.js"></script> -->
+		<script defer src="js/auth.js"></script>
+		<!-- <script defer src="js/auth-facebook.js"></script> -->
+		<!-- <script defer src="js/attractions-gps.js"></script> -->
 	</head>
 
 	<body class="ui-page-theme-a">
@@ -35,16 +47,17 @@
 				<form class="formValidation" data-method="login">
 					<fieldset>
 						E-mail:
-						<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
+						<input id="email" type="text" name="email" value="" placeholder="email" required/>
 						Password:
-						<input id="passwordVal" type="password" name="password" value="mmmmmmmm" placeholder="password" required/>
-
-						<a href="#mainPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign in</a>
-
+						<input id="password" type="password" name="password" value="" placeholder="password" required/>
+						<div id="singIn">
+							<a href="" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign in</a>
+						</div>
 						<center><a href="#forgotPage" style="color:#0070c0; font-size:12px">Forgot password?</a></center>
-
+						<div id="facebookLogin">
+							<center><a href="#facebookLogin" style="color:#0070c0; font-size:12px">Login with Facebook</a></center>
+						</div>
 						<hr color="#0070c0">
-
 						New user
 						<a href="#registrationPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign up</a>
 					</fieldset>
@@ -63,8 +76,8 @@
 				<hr color="#0070c0">
 
 				E-mail:
-				<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
-				<a href="#loginPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Send</a>
+				<input class="emailForgot" id="emailForgot" type="email" name="email" value="piotrek.slawek@gmail.com" placeholder="email" required/>
+				<a href="#loginPage" id="passReset" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Send</a>
 			</div>
 		</div>
 
@@ -79,71 +92,19 @@
 				<hr color="#0070c0">
 
 				E-mail:
-				<input id="emailVal" type="text" name="email" value="jogndoe@gmail.com" placeholder="email" required/>
+				<input class="emailSingUp" id="emailSingUp" type="email" name="email" value="dupa12312@onet.pl" placeholder="email" required/>
 				Password:
-				<input id="passwordVal" type="password" name="password" value="mmmmmmmm" placeholder="password" required/>
+				<input id="passwordSingUp" type="password" name="password" value="rac123" placeholder="password" required/>
 				Confirm password:
-				<input id="confirmPasswordVal" type="password" name="password" value="mmmmmmmm" placeholder="confirmPassword" required/>
+				<input id="confirmPasswordSingUp" type="password" name="password" value="rac123" placeholder="confirmPassword" required/>
 
-				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign up</a>
+				<a href="#menuPage" id="singUp" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Sign up</a>
 			</div>
 		</div>
-
-<!--MAIN PAGE-->
-		<div data-role="page" id="mainPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
-
-			<div data-role="header">
-			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
-				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
-			</div>
-
-			<div class="menu">
-			  <ul>
-				<a href="#"><li>Search attractions</li></a>
-				<a href="#"><li>Categories of attractions</li></a>
-				<a href="#"><li>My profile</li></a>
-				<a href="#"><li><img src="css\icons-png\action-black.png"/>   Log out</li></a>
-			  </ul>
-			</div>
-
-			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
-				<div class="ui-grid-b ui-responsive">
-					<div class="ui-grid-b">
-						<div class="ui-block-a"></div>
-						<div class="ui-block-b">
-							<img style="width:100%" src="img/aplication.png"/>
-						</div>
-						<div class="ui-block-c"></div>
-					</div>
-				</div>
-				<hr color="#0070c0">
-				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Search attractions</a>
-				<a href="#menuPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Select category for attractions</a>
-			</div>
-		</div>
-
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
 		<script>
-			$( document ).ready(function() {
-
-			$( ".cross" ).hide();
-			$( ".menu" ).hide();
-			$( ".hamburger" ).click(function() {
-			$( ".menu" ).slideToggle( "slow", function() {
-			$( ".hamburger" ).hide();
-			$( ".cross" ).show();
-			});
-			});
-
-			$( ".cross" ).click(function() {
-			$( ".menu" ).slideToggle( "slow", function() {
-			$( ".cross" ).hide();
-			$( ".hamburger" ).show();
-			});
-			});
-
-			});
+		$( "#facebookLogin" ).click(function() {
+				document.location.href = 'facebook-popup.html';
+		});
 		</script>
 	</body>
 </html>
