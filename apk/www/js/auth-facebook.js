@@ -51,6 +51,16 @@ function toggleSignIn() {
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
  *    out, and that is where we update the UI.
  */
+
+ function singOut() {
+     if (!firebase.apps.length) {
+         initApp();
+     }
+     firebase.auth().signOut()
+         .then(window.location.href = 'index.html');
+ }
+
+
 function initApp() {
   // Listening for auth state changes.
   // [START authstatelistener]
@@ -74,6 +84,7 @@ function initApp() {
       var uid = user.uid;
       var providerData = user.providerData;
       // [START_EXCLUDE]
+      document.location.href = 'afterLogin2.html';
       document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
       document.getElementById('quickstart-sign-in').textContent = 'Log out';
       document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
@@ -92,7 +103,6 @@ function initApp() {
     // [END_EXCLUDE]
   });
   // [END authstatelistener]
-
   document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, true);
 }
 
