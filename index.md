@@ -5,14 +5,14 @@ Aplikacja CityLive na podstawie lokalizacji gps będzie wyświetlała atrakcje, 
 - Magdalena Dynowska
 - Piotr Sławek 
 - Sebastian Rogala
-Grupa dziekańska KrZUIs4011Si
 
 ### Zarządzanie projektem
 https://trello.com/b/dpkB4UmK/aplikacja-citylive
 
-### Czas pracy
+### Raport prac
 https://docs.google.com/spreadsheets/d/1YejuTqnoduXrT25HvoLxU2271Rv93-7IMHBrT8m7TX0/edit?usp=sharing
 
 ### Prototyp
+Większą wersje prototypu można pobrać tutaj: https://www.dropbox.com/s/5cq887iq1tjm43t/CityLive_prototyp.html?dl=0
 <img src="makieta.png"/>
 
