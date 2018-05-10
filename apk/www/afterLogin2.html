@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Account</title>
+
+		<link rel="stylesheet" href="css/citylive.css" />
+
+		<!-- <script src="cordova.js"></script> -->
+		<link rel="stylesheet" href="css/blue.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+
+		<script src="js/jquery/jquery-2.1.4.min.js"></script>
+		<script src="js/jquery/jquery.validate.js"></script>
+		<script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+
+		<script src="js/firebase/4.13.0/firebase.js"></script>
+		<script src="js/firebase/4.13.0/firebase-app.js"></script>
+		<script src="js/firebase/4.13.0/firebase-auth.js"></script>
+		<script src="js/firebase/4.13.0/firebase-database.js"></script>
+		<script src="js/firebase/4.13.0/firebase-messaging.js"></script>
+		<script src="js/firebase/4.13.0/firebase-storage.js"></script>
+
+		<!-- <script defer src="js/app.js"></script> -->
+		<!-- <script src="js/attractions-gps.js"></script> -->
+		<!-- <script src="js/jquery-menu.js"></script> -->
+		<script src="js/buttons.js"></script>
+		<!-- <script src="js/db.js"></script> -->
+		<!-- <script src="js/gmaps-gps2.js"></script> -->
+		<!-- <script src="js/singOut.js"></script> -->
+		<!-- <script src="js/afterLogin.js"></script> -->
+		<!-- <script src="js/auth-facebook.js"></script> -->
+	</head>
+
+	<body class="ui-page-theme-a">
+    <icon src="img/aplication.png"/>
+    <!--MAIN PAGE-->
+		<div data-role="page" id="mainPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+
+			<div data-role="header">
+			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+			</div>
+
+			<!-- <div class="menu"> -->
+            <div class="menu">
+			  <ul>
+				<!-- <div id="searchAttractions">
+					<a href="#searchAttractions"><li>Search attractions</li></a>
+				<div> -->
+				<div id="getCategories">
+					<a href="#getCategories"><li>Categories of attractions</li></a>
+				</div>
+				<div id=myProfile>
+					<a href="#myProfile"><li>My profile</li></a>
+				</div>
+				<!-- <a href="#"><li><id='singout' img src="css\icons-png\action-black.png"/>Log out</li></a> -->
+                <div id=logOut>
+					<a href="#logOut"><li><img src="css\icons-png\action-black.png"/>Log out</li></a>
+				</div>
+			  </ul>
+              <!-- <div id='logOut'>Log Out</div> -->
+			</div>
+            <!-- <div class="tabscontnt" id='audio'>Audio Here</div> -->
+            <!-- <div class="tabscontnt" id='subscribe'>Subscribe info here</div> -->
+
+			<div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+				<div class="ui-grid-b ui-responsive">
+					<div class="ui-grid-b">
+						<div class="ui-block-a"></div>
+						<div class="ui-block-b">
+							<img style="width:100%" src="img/aplication.png"/>
+						</div>
+						<div class="ui-block-c"></div>
+					</div>
+				</div>
+				<hr color="#0070c0">
+				<div id="searchAttractionsButton">
+					<a href="#" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Search attractions</a>
+				</div>
+				<div id="selectAttractionsCategory">
+					<a href="#selectAttractionsCategory" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Select attractions categories</a>
+				</div>
+				<!-- <div id='editFavorites'>
+					<a href="#editFavorites" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Edit Favorites</a>
+				</div> -->
+			</div>
+		</div>
+
+		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+		<!-- <script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script> -->
+		<!-- <script src="js/jquery-menu.js"></script> -->
+		<!-- <script src="js/db.js"></script> -->
+		<script>
+		$( document ).ready(function() {
+			$( "#editFavorites" ).click(function() {
+				editFavorites(userId, favorites);
+			});
+			$( "#selectAttractionsCategory" ).click(function() {
+					document.location.href = 'categories.html';
+			})
+			$( "#searchAttractionsButton" ).click(function() {
+			        document.location.href = 'searchAttractions.html';
+			})
+		});
+		</script>
+		<!--
+		$( document ).ready(function() {
+			$( ".cross" ).hide();
+			$( ".menu" ).hide();
+			$( ".hamburger" ).click(function() {
+				$( ".menu" ).slideToggle( "slow", function() {
+				$( ".hamburger" ).hide();
+				$( ".cross" ).show();
+				});
+			});
+
+			$( ".cross" ).click(function() {
+				$( ".menu" ).slideToggle( "slow", function() {
+					$( ".cross" ).hide();
+					$( ".hamburger" ).show();
+				});
+			});
+			// $( "#searchAttractions" ).click(function() {
+			//     document.location.href = 'searchAttractions.html';
+			// });
+			$( "#myProfile" ).click(function() {
+				myProfile(userId);
+			});
+			$( "#getCategories" ).click(function() {
+				getCategories();
+			});
+			$( "#logOut" ).click(function() {
+				singOut();
+				// toggleSignIn();
+				// initApp();
+				// firebase.auth().signOut();
+			});
+			// $( "#editFavorites" ).click(function() {
+			//     editFavorites(userId);
+			// });
+		});
+		</script> -->
+	</body>
+</html>
