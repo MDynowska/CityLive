@@ -21,7 +21,10 @@ function singOut() {
         initApp();
     }
     firebase.auth().signOut()
-        .then(window.location.href = 'index.html');
+        .then(function() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
 }
 
 function myProfile(userId) {
