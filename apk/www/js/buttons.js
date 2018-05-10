@@ -38,7 +38,7 @@ function myProfile(userId) {
         if (!snapshot.val().favorites) {
             alert('You do not have any favorites');
         } else {
-            alert(snapshot.val().favorites);
+            alert("Those are categories of attracions that you have configured: \n" + snapshot.val().favorites);
         }
         // snapshot.forEach(function(childSnapshot) {
         //     if (childSnapshot.val().username === userLogged) {
@@ -58,7 +58,7 @@ function getCategories() {
     var categories = firebase.database().ref('categories');
     categories.once('value', function(snapshot) {
         console.log(snapshot.val());
-        alert(snapshot.val())
+        alert("Categories of attracions that application support: \n" + snapshot.val())
         // snapshot.forEach(function(childSnapshot) {
         //     if (childSnapshot.val().username === userLogged) {
         //         console.log(childSnapshot.val().favorites);
@@ -115,11 +115,11 @@ $( document ).ready(function() {
             $( ".hamburger" ).show();
         });
     });
-    $( "#myProfile" ).click(function() {
-        myProfile(userId);
-    });
     $( "#getCategories" ).click(function() {
         getCategories();
+    });
+    $( "#myProfile" ).click(function() {
+        myProfile(userId);
     });
     $( "#logOut" ).click(function() {
         singOut();

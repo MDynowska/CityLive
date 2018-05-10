@@ -9,6 +9,24 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-request-location-accuracy": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
     }
   },
   "dependent_plugins": {}

@@ -1,5 +1,5 @@
 // array.indexOf(newItem) === -1 ? array.push(newItem) : console.log("This item already exists");
-var favorites = [];
+var newFavorites = [];
 var userId = localStorage.getItem('userId')
 var userEmail = localStorage.getItem('userEmail')
 var userFavorites = localStorage.getItem('userFavorites')
@@ -8,15 +8,15 @@ function checkUncheck(box) {
     // console.log(favorites);
     if($(box).is(':checked')) {
         console.log(box['name'] + " Checked");
-        favorites.indexOf(box['name']) === -1 ? favorites.push(box['name']) : console.log("This item already exists");
+        newFavorites.indexOf(box['name']) === -1 ? newFavorites.push(box['name']) : console.log("This item already exists");
         // favorites.push(box['name']);
         // console.log(favorites);
     } else {
         console.log(box['name'] + " Unchecked");
-        var favoriteIndex = favorites.indexOf(box['name']);
+        var favoriteIndex = newFavorites.indexOf(box['name']);
         // console.log(favoriteIndex);
         if (favoriteIndex < 1) {
-            favorites.splice(favoriteIndex, 1);
+            newFavorites.splice(favoriteIndex, 1);
         } else {
             console.log("This item is not in favorites");
         }
@@ -24,7 +24,7 @@ function checkUncheck(box) {
         // favorites.indexOf(box['name']) != -1 ? favorites.push(box['name']) : console.log("This item already exists");
         // Checkbox is not checked..
     }
-    console.log(favorites);
+    console.log(newFavorites);
 }
 //
 // function check(box) {
@@ -108,27 +108,36 @@ function initApp() {
     firebase.initializeApp(config);
 }
 
-function editFavorites(userId, email, userFavorites) {
+
+function writeUserData(userId, email, favorites) {
+  firebase.database().ref('users/' + userId).set({
+    email: email,
+    favorites: favorites,
+  });
+}
+
+function editFavorites(userId, userEmail, newFavorites) {
     if (!firebase.apps.length) {
         initApp();
     }
-    // var userId = localStorage.getItem('userId')
-    // var userId = userId;
+    // var userId = userId
     // var email = userEmail;
-    // var favorites = userFavorites;
+    // var favorites = favorites;
     // var email = userEmail;
     // if (!userId) {
     //     setTimeout(function() {
     //         firebase.auth().getUid();
     //     }, 100);
     // }
-    writeUserData(userId, email, favorites);
+    writeUserData(userId, userEmail, newFavorites);
 }
 
 function saveFavorites() {
-    localStorage.setItem('userFavorites', favorites);
-    console.log(favorites);
-    editFavorites(userId, userEmail, userFavorites);
+    // localStorage.setItem('userFavorites', favorites);
+    console.log(newFavorites);
+    alert("Those categories were added to Your user Profile: \n" + newFavorites)
+    editFavorites(userId, userEmail, newFavorites);
+    // document.location.href = 'afterLogin2.html';
 }
 
 // function saveFavorites() {

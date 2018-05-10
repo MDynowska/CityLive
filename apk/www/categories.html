@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Account</title>
+
+        <link rel="stylesheet" href="css/citylive.css" />
+
+        <!-- <script src="cordova.js"></script> -->
+        <link rel="stylesheet" href="css/blue.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+
+        <script src="js/jquery/jquery-2.1.4.min.js"></script>
+        <script src="js/jquery/jquery.validate.js"></script>
+        <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+
+        <script src="js/firebase/4.13.0/firebase.js"></script>
+        <script src="js/firebase/4.13.0/firebase-app.js"></script>
+        <script src="js/firebase/4.13.0/firebase-auth.js"></script>
+        <script src="js/firebase/4.13.0/firebase-database.js"></script>
+        <script src="js/firebase/4.13.0/firebase-messaging.js"></script>
+        <script src="js/firebase/4.13.0/firebase-storage.js"></script>
+
+        <!-- <script defer src="js/app.js"></script> -->
+        <!-- <script src="js/attractions-gps.js"></script> -->
+        <!-- <script src="js/jquery-menu.js"></script> -->
+        <script src="js/buttons.js"></script>
+        <script src="js/favorites.js"></script>
+        <!-- <script src="js/favorites2.js"></script> -->
+        <!-- <script src="js/db.js"></script> -->
+        <!-- <script src="js/gmaps-gps2.js"></script> -->
+        <!-- <script src="js/singOut.js"></script> -->
+        <!-- <script src="js/afterLogin.js"></script> -->
+        <!-- <script src="js/auth-facebook.js"></script> -->
+    </head>
+    <body>
+        <icon src="img/aplication.png"/>
+        <!--MAIN PAGE-->
+    		<div data-role="page" id="mainPage" style="background-image:url(img/background.jpg)" data-header-title="mainPage" data-header-menu="false">
+
+    			<div data-role="header">
+                    <a href="javascript:history.back()" class="back ui-btn-left ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\carat-l-black.png"/></a>
+    			 	<a class="hamburger ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\bars-black.png"/></a>
+    				<a class="cross ui-btn-right ui-btn ui-shadow ui-corner-all"><img src="css\icons-png\delete-black.png"/></a>
+    			</div>
+
+    			<!-- <div class="menu"> -->
+                <div class="menu">
+    			  <ul>
+    				<!-- <div id="searchAttractions">
+    					<a href="#searchAttractions"><li>Search attractions</li></a>
+    				<div> -->
+    				<div id="getCategories">
+    					<a href="#getCategories"><li>Categories of attractions</li></a>
+    				</div>
+    				<div id=myProfile>
+    					<a href="#myProfile"><li>My profile</li></a>
+    				</div>
+    				<!-- <a href="#"><li><id='singout' img src="css\icons-png\action-black.png"/>Log out</li></a> -->
+                    <div id=logOut>
+    					<a href="#logOut"><li><img src="css\icons-png\action-black.png"/>Log out</li></a>
+    				</div>
+    			  </ul>
+                  <!-- <div id='logOut'>Log Out</div> -->
+    			</div>
+                <div data-role="main" class="ui-content" style="background-color: rgba(255, 255, 255, 0.7)">
+                    <br>
+                    <br>
+                    <center><b style="color:#0070c0">Select your categories of attractions:</b></center>
+                    <hr color="#0070c0">
+                    <br>
+                    <form>
+                            <input type="checkbox" name="cinemas" value="cinemas" style="margin: 0 0 0 90px"/>Cinemas
+                            <input type="checkbox" name="museums" name="museums" value="museums" style="margin: 0 0 0 90px"/>Museums
+                            <input type="checkbox" name="spa" value="spa" style="margin: 0 0 0 90px" />Spa
+                            <input type="checkbox" name="restaurant" value="restaurant" style="margin: 0 0 0 90px"/>Restaurants
+
+                        <div style="padding-left: 160px; margin-top: -112px">
+                            <input type="checkbox" name="gym" value="gym" style="margin: 0 0 0 90px" />Gym
+                            <input type="checkbox" name="zoo" value="zoo" style="margin: 0 0 0 90px"/>Zoo
+                            <input type="checkbox" name="cafe" value="cafe" style="margin: 0 0 0 90px" />Cafe
+                            <input type="checkbox" name="art" value="art" style="margin: 0 0 0 90px"/>Art gallery
+                        </div>
+                    </form>
+                    <div id="saveFavorites">
+                        <a href="#mainPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Save</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+            $( "#saveFavorites" ).click(function() {
+                // saveFavorites();
+                setTimeout(saveFavorites(), 2000);
+                // window.location.href = 'afterLogin2.html';
+            });
+            </script>
+    </body>
+</html>
