@@ -31,6 +31,24 @@ function initApp() {
     firebase.initializeApp(config);
 }
 
+// Funkcje bazy danych
+function addUserDB(userId, email) {
+  firebase.database().ref('users/' + userId).set({
+    email: email,
+  });
+  window.setTimeout(function() {
+      location.href = "index.html";
+  }, 5000);
+}
+
+
+function writeUserData(userId, email, favorites) {
+  firebase.database().ref('users/' + userId).set({
+    email: email,
+    favorites: favorites,
+  });
+}
+
 function toggleSignIn() {
     if (!firebase.apps.length) {
         initApp();

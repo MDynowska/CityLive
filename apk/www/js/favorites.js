@@ -137,6 +137,9 @@ function saveFavorites() {
     console.log(newFavorites);
     alert("Those categories were added to Your user Profile: \n" + newFavorites)
     editFavorites(userId, userEmail, newFavorites);
+    window.setTimeout(function() {
+        location.href = "afterLogin2.html";
+    }, 5000);
     // document.location.href = 'afterLogin2.html';
 }
 
