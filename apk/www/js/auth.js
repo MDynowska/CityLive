@@ -128,11 +128,12 @@ function handleSignUp() {
     // [START createwithemail]
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function(user) {
-            user_id = user.uid;
-            user_email = user.email;
-
+            userId = user.uid;
+            userEmail = user.email;
             alert("Account Created");
-            window.location.href = "index.html";
+            addUserDB(userId, userEmail)
+            // alert("Account Created");
+            // window.location.href = "index.html";
             })
         .catch(function(error) {
         // Handle Errors here.
