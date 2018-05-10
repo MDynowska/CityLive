@@ -2,7 +2,7 @@
 var newFavorites = [];
 var userId = localStorage.getItem('userId')
 var userEmail = localStorage.getItem('userEmail')
-var userFavorites = localStorage.getItem('userFavorites')
+// var userFavoritesNew = localStorage.getItem('userFavoritesNew')
 
 function checkUncheck(box) {
     // console.log(favorites);
@@ -138,7 +138,7 @@ function saveFavorites() {
     alert("Those categories were added to Your user Profile: \n" + newFavorites)
     editFavorites(userId, userEmail, newFavorites);
     window.setTimeout(function() {
-        location.href = "afterLogin2.html";
+        location.href = document.referrer;
     }, 5000);
     // document.location.href = 'afterLogin2.html';
 }

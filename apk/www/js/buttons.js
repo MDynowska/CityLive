@@ -1,6 +1,6 @@
 var userId = localStorage.getItem('userId')
 var userEmail = localStorage.getItem('userEmail')
-var userFavorites = localStorage.getItem('userFavorites')
+var userFavoritesNew = localStorage.getItem('userFavoritesNew')
 
 
 function initApp() {
@@ -27,27 +27,27 @@ function singOut() {
         });
 }
 
-function myProfile(userId) {
-    if (!firebase.apps.length) {
-        initApp();
-    }
-    // var userId = firebase.auth().getUid();
-    // console.log(userLogged);
-    var user = firebase.database().ref('users/' + userId);
-    user.once('value', function(snapshot) {
-        if (!snapshot.val().favorites) {
-            alert('You do not have any favorites');
-        } else {
-            alert("Those are categories of attracions that you have configured: \n" + snapshot.val().favorites);
-        }
-        // snapshot.forEach(function(childSnapshot) {
-        //     if (childSnapshot.val().username === userLogged) {
-        //         console.log(childSnapshot.val().favorites);
-        //         };
-        //     /* console.log(childSnapshot.val().username); */
-        //     });
-        });
-}
+// function myProfile(userId) {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     // var userId = firebase.auth().getUid();
+//     // console.log(userLogged);
+//     var user = firebase.database().ref('users/' + userId);
+//     user.once('value', function(snapshot) {
+//         if (!snapshot.val().favorites) {
+//             alert('You do not have any favorites');
+//         } else {
+//             alert("Those are categories of attracions that you have configured: \n" + snapshot.val().favorites);
+//         }
+//         // snapshot.forEach(function(childSnapshot) {
+//         //     if (childSnapshot.val().username === userLogged) {
+//         //         console.log(childSnapshot.val().favorites);
+//         //         };
+//         //     /* console.log(childSnapshot.val().username); */
+//         //     });
+//         });
+// }
 
 
 // function myProfileEmail(userEmail) {
@@ -77,55 +77,86 @@ function myProfile(userId) {
 //     });
 // }
 
-function getCategories() {
+// function getCategories() {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     var categories = firebase.database().ref('categories');
+//     categories.once('value', function(snapshot) {
+//         categories = snapshot.val();
+//         localStorage.setItem('categoriesDB', categories)
+//         console.log(snapshot.val());
+//         alert("Categories of attracions that application support: \n" + snapshot.val())
+//     });
+// }
+
+function getCategoriesAlert() {
     if (!firebase.apps.length) {
         initApp();
     }
-    // var userLogged = firebase.auth().getUid();
-    // console.log(userLogged);
     var categories = firebase.database().ref('categories');
     categories.once('value', function(snapshot) {
+        categories = snapshot.val();
+        localStorage.setItem('categoriesDB', categories)
         console.log(snapshot.val());
         alert("Categories of attracions that application support: \n" + snapshot.val())
-        // snapshot.forEach(function(childSnapshot) {
-        //     if (childSnapshot.val().username === userLogged) {
-        //         console.log(childSnapshot.val().favorites);
-        //         };
-        // console.log(childSnapshot.val())
-        // alert()
-        //     });
         });
-    // });
 }
 
-function writeUserData(userId, email, favorites) {
-  firebase.database().ref('users/' + userId).set({
-    email: email,
-    favorites: favorites,
-  });
-}
+// function writeUserData(userId, email, favorites) {
+//   firebase.database().ref('users/' + userId).set({
+//     email: email,
+//     favorites: favorites,
+//   });
+// }
 
 
-function editFavorites() {
-    if (!firebase.apps.length) {
-        initApp();
-    }
-    // var userId = localStorage.getItem('userId')
-    var userId = userId;
-    var email = userEmail;
-    var favorites = userFavorites;
-    // var email = userEmail;
-    // if (!userId) {
-    //     setTimeout(function() {
-    //         firebase.auth().getUid();
-    //     }, 100);
-    // }
-    writeUserData(userId, email, favorites);
-}
+// function editFavorites() {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     // var userId = localStorage.getItem('userId')
+//     var userId = userId;
+//     var email = userEmail;
+//     var favorites = userFavorites;
+//     // var email = userEmail;
+//     // if (!userId) {
+//     //     setTimeout(function() {
+//     //         firebase.auth().getUid();
+//     //     }, 100);
+//     // }
+//     writeUserData(userId, email, favorites);
+// }
 
 // function searchAttractions() {
 //     window.location.href = 'searchAttractions.html';
 // }
+
+// function getUserFavorites(userId) {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     // var userLogged = firebase.auth().getUid();
+//     // console.log(userLogged);
+//     // console.log(userId);
+//     var userFavoritesDB = firebase.database().ref('users/' + userId);
+//     userFavoritesDB.once('value', function(snapshot) {
+//         var userFavoritesDB = snapshot.val().favorites;
+//         localStorage.setItem('userFavoritesDB', userFavoritesDB);
+//         // console.log(userFavorites);
+//     });
+//         // alert("Categories of attracions that application support: \n" + snapshot.val())
+//         // snapshot.forEach(function(childSnapshot) {
+//         //     if (childSnapshot.val().username === userLogged) {
+//         //         console.log(childSnapshot.val().favorites);
+//         //         };
+//         // console.log(childSnapshot.val())
+//         // alert()
+//         //     });
+//         // });
+//     // });
+// };
+
 
 $( document ).ready(function() {
     $( ".cross" ).hide();
@@ -143,17 +174,24 @@ $( document ).ready(function() {
             $( ".hamburger" ).show();
         });
     });
+    $( "#afterLogin" ).click(function() {
+        window.location.href = 'afterLogin2.html';
+        // searchAttractions();
+    });
     $( "#searchAttractionsMenu" ).click(function() {
         window.location.href = 'searchAttractions.html';
         // searchAttractions();
     });
     $( "#getCategories" ).click(function() {
-        getCategories();
+        getCategoriesAlert();
     });
     $( "#myProfile" ).click(function() {
-        myProfile(userId);
+        // myProfile(userId);
         // myProfileEmail(userEmail);
-        // window.location.href = 'profilePage.html';
+        // getUserFavorites(userId);
+        window.setTimeout(function() {
+            location.href = 'profilePage.html';
+        }, 5000);
     });
     $( "#logOut" ).click(function() {
         singOut();
