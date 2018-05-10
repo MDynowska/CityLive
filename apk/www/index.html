@@ -25,7 +25,7 @@
 		<!-- <script defer src="js/app.js"></script> -->
 		<script defer src="js/auth.js"></script>
 		<!-- <script defer src="js/buttons.js"></script> -->
-		<!-- <script defer src="js/auth-facebook.js"></script> -->
+		<script defer src="js/auth-facebook.js"></script>
 		<!-- <script defer src="js/attractions-gps.js"></script> -->
 	</head>
 
@@ -104,7 +104,8 @@
 		</div>
 		<script>
 		$( "#facebookLogin" ).click(function() {
-				document.location.href = 'facebook-popup.html';
+			toggleSignInFacebook();
+				// document.location.href = 'facebook-popup.html';
 		});
 		</script>
 	</body>

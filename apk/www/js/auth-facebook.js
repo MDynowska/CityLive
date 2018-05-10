@@ -1,4 +1,26 @@
-function toggleSignIn() {
+function checkGPS() {
+    function onSuccess(position) {
+        var gps_cords = [position.coords.latitude, position.coords.longitude];
+        // localStorage.setItem('lokalizacja', gps_cords)
+        console.log("Z getgps - " + gps_cords)
+        // var bagry = new google.maps.LatLng(gps_cords[0], [1]);
+        localStorage.setItem('lokalizacja', gps_cords)
+        localStorage.setItem('lat', gps_cords[0])
+        localStorage.setItem('lng', gps_cords[1])
+        // console.log(bagry)
+        // g_bagry = bagry;
+        window.location.href='afterLogin2.html';
+    }
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+        'message: ' + error.message + '\n');
+    }
+    // navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: Infinity, enableHighAccuracy: false });
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
+
+
+function toggleSignInFacebook() {
   if (!firebase.auth().currentUser) {
     // [START createprovider]
     var provider = new firebase.auth.FacebookAuthProvider();
@@ -11,11 +33,22 @@ function toggleSignIn() {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
       // The signed-in user info.
-      var user = result.user;
+      var userFace = result.user;
+      var uidFace = userFace['providerData'][0]['uid']
+      console.log(uidFace)
+      var emailFace = result.user['providerData'][0]['email']
+      console.log(emailFace)
+      localStorage.setItem('userId', uidFace)
+      localStorage.setItem('userEmail', emailFace)
+      checkGPS();
+      // window.setTimeout(function() {
+      //     location.href = "afterLogin2.html";
+      // }, 5000);
+
       // [START_EXCLUDE]
-      document.getElementById('quickstart-oauthtoken').textContent = token;
+      // document.getElementById('quickstart-oauthtoken').textContent = token;
       // [END_EXCLUDE]
-      document.location.href = 'afterLogin2.html';
+      // document.location.href = 'afterLogin2.html';
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -41,7 +74,7 @@ function toggleSignIn() {
     // [END signout]
   }
   // [START_EXCLUDE]
-  document.getElementById('quickstart-sign-in').disabled = true;
+  // document.getElementById('quickstart-sign-in').disabled = true;
   // [END_EXCLUDE]
 }
 // [END buttoncallback]
@@ -57,8 +90,10 @@ function toggleSignIn() {
          initApp();
      }
      firebase.auth().signOut()
-         .then(window.location.href = 'index.html');
- }
+         .then(window.setTimeout(function() {
+             location.href = "index.html";
+         }, 5000)
+ )};
 
 
 function initApp() {
@@ -73,39 +108,45 @@ function initApp() {
       messagingSenderId: "440215787226"
   }
   firebase.initializeApp(config);
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
-      // [START_EXCLUDE]
-      document.location.href = 'afterLogin2.html';
-      document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-      document.getElementById('quickstart-sign-in').textContent = 'Log out';
-      document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
-      // [END_EXCLUDE]
-    } else {
-      // User is signed out.
-      // [START_EXCLUDE]
-      document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-      document.getElementById('quickstart-sign-in').textContent = 'Log in with Facebook';
-      document.getElementById('quickstart-account-details').textContent = 'null';
-      document.getElementById('quickstart-oauthtoken').textContent = 'null';
-      // [END_EXCLUDE]
-    }
-    // [START_EXCLUDE]
-    document.getElementById('quickstart-sign-in').disabled = false;
-    // [END_EXCLUDE]
-  });
-  // [END authstatelistener]
-  document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, true);
 }
 
 window.onload = function() {
   initApp();
 };
+
+//   firebase.auth().onAuthStateChanged(function(user) {
+//     if (user) {
+//       // User is signed in.
+//       var displayName = user.displayName;
+//       var email = user.email;
+//       var emailVerified = user.emailVerified;
+//       var photoURL = user.photoURL;
+//       var isAnonymous = user.isAnonymous;
+//       var uid = user.uid;
+//       var providerData = user.providerData;
+//       // [START_EXCLUDE]
+//       document.location.href = 'afterLogin2.html';
+//       document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+//       document.getElementById('quickstart-sign-in').textContent = 'Log out';
+//       document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+//       // [END_EXCLUDE]
+//     } else {
+//       // User is signed out.
+//       // [START_EXCLUDE]
+//       document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
+//       document.getElementById('quickstart-sign-in').textContent = 'Log in with Facebook';
+//       document.getElementById('quickstart-account-details').textContent = 'null';
+//       document.getElementById('quickstart-oauthtoken').textContent = 'null';
+//       // [END_EXCLUDE]
+//     }
+//     // [START_EXCLUDE]
+//     document.getElementById('quickstart-sign-in').disabled = false;
+//     // [END_EXCLUDE]
+//   });
+//   // [END authstatelistener]
+//   document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, true);
+// }
+//
+// window.onload = function() {
+//   initApp();
+// };

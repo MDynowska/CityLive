@@ -49,6 +49,34 @@ function myProfile(userId) {
         });
 }
 
+
+// function myProfileEmail(userEmail) {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     // var userId = firebase.auth().getUid();
+//     // console.log(userLogged);
+//     var users = firebase.database().ref('users/');
+//     users.once('value', function(snapshot) {
+//         // if (!snapshot.val().favorites) {
+//         //     alert('You do not have any favorites');
+//         // } else {
+//         //     alert("Those are categories of attracions that you have configured: \n" + snapshot.val().favorites);
+//         // }
+//         snapshot.forEach(function(childSnapshot) {
+//             if (childSnapshot.val().email === userEmail) {
+//                 console.log(childSnapshot.val().favorites);
+//                 if (!snapshot.val().favorites) {
+//                     alert('You do not have any favorites');
+//                 } else {
+//                     alert("Those are categories of attracions that you have configured: \n" + snapshot.val().favorites);
+//                 }
+//             };
+//             /* console.log(childSnapshot.val().username); */
+//         });
+//     });
+// }
+
 function getCategories() {
     if (!firebase.apps.length) {
         initApp();
@@ -115,11 +143,17 @@ $( document ).ready(function() {
             $( ".hamburger" ).show();
         });
     });
+    $( "#searchAttractionsMenu" ).click(function() {
+        window.location.href = 'searchAttractions.html';
+        // searchAttractions();
+    });
     $( "#getCategories" ).click(function() {
         getCategories();
     });
     $( "#myProfile" ).click(function() {
         myProfile(userId);
+        // myProfileEmail(userEmail);
+        // window.location.href = 'profilePage.html';
     });
     $( "#logOut" ).click(function() {
         singOut();
