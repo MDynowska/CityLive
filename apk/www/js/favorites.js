@@ -135,7 +135,7 @@ function editFavorites(userId, userEmail, newFavorites) {
 function saveFavorites() {
     // localStorage.setItem('userFavorites', favorites);
     console.log(newFavorites);
-    alert("Those categories were added to Your user Profile: \n" + newFavorites)
+    // alert("Those categories were added to Your user Profile: \n" + newFavorites)
     editFavorites(userId, userEmail, newFavorites);
     window.setTimeout(function() {
         location.href = document.referrer;

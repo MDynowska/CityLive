@@ -77,11 +77,12 @@ function changePassword() {
         console.log("Nowe haslo potwierdzone " + newPasswordConfirmed);
         user.updatePassword(newPassword).then(function() {
           // Update successful.
+          alert("Password Changed")
           window.setTimeout(function() {
               location.href = document.referrer;
           }, 100);
             }, function(error) {
-          // An error happened.
+          alert(error.message)
         });
     }, 2000);
 }
@@ -131,8 +132,8 @@ function toggleSignIn() {
             localStorage.setItem('userId', user_id);
             localStorage.setItem('userEmail', user_email);
             // alert(user)
-        // console.log("Zalogowano jako: " + email)
-            alert("Logged in as: " + email);
+            // console.log("Zalogowano jako: " + email)
+            // alert("Logged in as: " + email);
             // setTimeout(checkGPS(), 5000);
             checkGPS();
             // window.location.href='afterLogin2.html';
@@ -167,7 +168,7 @@ function handleSignUp() {
         .then(function(user) {
             userId = user.uid;
             userEmail = user.email;
-            alert("Account Created");
+            // alert("Account Created");
             addUserDB(userId, userEmail)
             // alert("Account Created");
             // window.location.href = "index.html";
