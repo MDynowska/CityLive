@@ -96,8 +96,17 @@ function saveFavorites() {
     editFavorites(userId, userEmail, newFavorites);
     // history.back();
     window.setTimeout(function() {
+        var a=document.createElement('a');
+        a.href=document.referrer;
+        if (a.pathname == "/profilePage.html") {
+            console.log("z profilePage")
+            location.href = 'profilePage.html';
+        } else {
+            console.log("z afterLogin")
+            location.href = 'afterLogin2.html';
+        }
         // location.href = 'profilePage.html';
-        history.back();
+        // history.back();
     }, 5000);
     // document.location.href = 'afterLogin2.html';
 }

@@ -168,7 +168,7 @@ function handleSignUp() {
         .then(function(user) {
             userId = user.uid;
             userEmail = user.email;
-            // alert("Account Created");
+            alert("Account Created");
             addUserDB(userId, userEmail)
             // alert("Account Created");
             // window.location.href = "index.html";
