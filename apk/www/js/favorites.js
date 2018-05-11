@@ -94,9 +94,10 @@ function saveFavorites() {
     console.log(newFavorites);
     // alert("Those categories were added to Your user Profile: \n" + newFavorites)
     editFavorites(userId, userEmail, newFavorites);
-    history.back();
-    // window.setTimeout(function() {
-    //     location.href = document.referrer;
-    // }, 1000);
+    // history.back();
+    window.setTimeout(function() {
+        // location.href = 'profilePage.html';
+        history.back();
+    }, 5000);
     // document.location.href = 'afterLogin2.html';
 }

@@ -10,6 +10,8 @@
 var map, places, infoWindow;
 var markers = [];
 var autocomplete;
+var list = [];
+var resCounter = 0;
 var countryRestrict = {'country': 'pl'};
 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
@@ -56,6 +58,10 @@ function getUserFavorites(userId) {
     userFavorites.once('value', function(snapshot) {
         // console.log(favorites);
         var favorites = snapshot.val().favorites;
+        if (!favorites) {
+            alert("You do not have any categories set, please set them first")
+            window.location.href = 'categories.html';
+        }
         console.log("Z user getUserFovirtes " + favorites);
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
@@ -76,8 +82,8 @@ function getUserFavorites(userId) {
 };
 
 function initMapNear() {
-    clearResults();
-    clearMarkers();
+    // clearResults();
+    // clearMarkers();
     var lat = localStorage.getItem('lat')
     var lng = localStorage.getItem('lng')
     var lokalizacja = new google.maps.LatLng(lat, lng);
@@ -148,7 +154,13 @@ function search(type) {
       // Create a marker for each hotel found, and
       // assign a letter of the alphabetic to each marker icon.
       // for (var i = 0; i < results.length; i++) {
-      for (var i = 0; i < 1; i++) {
+      // console.log(results);
+      // if (results.legth === 0) {
+      //     alert("Nothing found")
+      // }
+      // debugger;
+      for (var i = 0; i < results.length; i++) {
+      // for (var i = 0; i < 1; i++) {
         var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
         var markerIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
         // Use marker animation to drop the icons incrementally on the map.
@@ -160,6 +172,7 @@ function search(type) {
         // If the user clicks a hotel marker, show the details of that hotel
         // in an info window.
         markers[i].placeResult = results[i];
+        list.push(markers[i]);
         google.maps.event.addListener(markers[i], 'click', showInfoWindow);
         setTimeout(dropMarker(i), i * 200);
         addResult(results[i], i);
@@ -208,9 +221,9 @@ function addResult(result, i) {
   var tr = document.createElement('tr');
   tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
   tr.onclick = function() {
-    google.maps.event.trigger(markers[i], 'click');
+    google.maps.event.trigger(list[resCount], 'click');
   };
-
+  resCount++;
   var iconTd = document.createElement('td');
   var nameTd = document.createElement('td');
   var icon = document.createElement('img');
@@ -228,6 +241,7 @@ function addResult(result, i) {
 function clearResults() {
   var results = document.getElementById('results');
   while (results.childNodes[0]) {
+      debugger;
     results.removeChild(results.childNodes[0]);
   }
 }
@@ -248,11 +262,13 @@ function showInfoWindow() {
 
 // Load the place information into the HTML elements used by the info window.
 function buildIWContent(place) {
-  document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
-      'src="' + place.icon + '"/>';
-  document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
-      '">' + place.name + '</a></b>';
-  document.getElementById('iw-address').textContent = place.vicinity;
+    if (document.getElementById('iw-icon')) {
+        document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+            'src="' + place.icon + '"/>';
+        document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+            '">' + place.name + '</a></b>';
+        document.getElementById('iw-address').textContent = place.vicinity;
+    }
 
   if (place.formatted_phone_number) {
     document.getElementById('iw-phone-row').style.display = '';

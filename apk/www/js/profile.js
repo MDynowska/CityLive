@@ -37,14 +37,16 @@ function getUserFavorites(userId) {
     var userFavorites = firebase.database().ref('users/' + userId);
     userFavorites.once('value', function(snapshot) {
         var favorites = snapshot.val().favorites;
-        favorites.forEach(function(favorite) {
-            // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
-                // var favorites = childSnapshot.val().favorites;
-                // console.log(childSnapshot.val())
-                console.log(favorite);
-                checkBoxFavorite(favorite, categories)
-                // localStorage.setItem('cinema', '1')
-        })
+        if (favorites) {
+            favorites.forEach(function(favorite) {
+                // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
+                    // var favorites = childSnapshot.val().favorites;
+                    // console.log(childSnapshot.val())
+                    console.log(favorite);
+                    checkBoxFavorite(favorite, categories)
+                    // localStorage.setItem('cinema', '1')
+            })
+        }
         // console.log(snapshot.val().favorites);
         // let userFavorites = snapshot.val().favorites;
         // return userFavorites;

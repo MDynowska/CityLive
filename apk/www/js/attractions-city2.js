@@ -9,6 +9,8 @@
 
 var map, places, infoWindow;
 var markers = [];
+var resCount = 0
+var list = []
 var autocomplete;
 var countryRestrict = {'country': 'pl'};
 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
@@ -114,6 +116,10 @@ function getUserFavorites(userId) {
     userFavorites.once('value', function(snapshot) {
         // console.log(favorites);
         var favorites = snapshot.val().favorites;
+        if (!favorites) {
+            alert("You do not have any categories set, please set them first")
+            window.location.href = 'categories.html';
+        }
         console.log(favorites);
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
@@ -179,8 +185,8 @@ function onPlaceChanged() {
     map.setZoom(15);
     getUserFavorites(userId);
     // multiSearch();
-    clearResults();
-    clearMarkers();
+    // clearResults();
+    // clearMarkers();
     // g_favoritesDB.forEach(search(favorite) {
     //     console.log("onPlaceChanged " + favorite);
     // });
@@ -208,12 +214,15 @@ function search(type) {
 
   places.nearbySearch(search, function(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // if (results.legth === 0) {
+        //     alert("Nothing found")
+        // }
       // clearResults();
       // clearMarkers();
       // Create a marker for each hotel found, and
       // assign a letter of the alphabetic to each marker icon.
-      // for (var i = 0; i < results.length; i++) {
-      for (var i = 0; i < 1; i++) {
+      for (var i = 0; i < results.length; i++) {
+      // for (var i = 0; i < 3; i++) {
         var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
         var markerIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
         // Use marker animation to drop the icons incrementally on the map.
@@ -225,6 +234,7 @@ function search(type) {
         // If the user clicks a hotel marker, show the details of that hotel
         // in an info window.
         markers[i].placeResult = results[i];
+        list.push(markers[i]);
         google.maps.event.addListener(markers[i], 'click', showInfoWindow);
         setTimeout(dropMarker(i), i * 200);
         addResult(results[i], i);
@@ -266,17 +276,19 @@ function dropMarker(i) {
 }
 
 function addResult(result, i) {
+    i = resCount;
   var results = document.getElementById('results');
   //var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
   var markerIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
   var tr = document.createElement('tr');
   tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
-  tr.onclick = function() {
+  tr.onclick = function(el) {
     // console.log('test click')
-    debugger;
-    google.maps.event.trigger(markers[i], 'click');
+    // debugger;
+    google.maps.event.trigger(list[i], 'click');
   };
+  resCount++;
 
   var iconTd = document.createElement('td');
   var nameTd = document.createElement('td');
@@ -302,7 +314,7 @@ function clearResults() {
 // Get the place details for a hotel. Show the information in an info window,
 // anchored on the marker for the hotel that the user selected.
 function showInfoWindow() {
-          debugger;
+          // debugger;
   var marker = this;
   places.getDetails({placeId: marker.placeResult.place_id},
       function(place, status) {
