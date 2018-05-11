@@ -103,9 +103,17 @@
 			</div>
 		</div>
 		<script>
+		$( "#singIn" ).click(function() {
+			toggleSignIn();
+		});
+		$( "#singUp" ).click(function() {
+			handleSignUp();
+		});
+		$( "#passReset" ).click(function() {
+			sendPasswordReset();
+		});
 		$( "#facebookLogin" ).click(function() {
 			toggleSignInFacebook();
-				// document.location.href = 'facebook-popup.html';
 		});
 		</script>
 	</body>

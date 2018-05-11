@@ -49,6 +49,43 @@ function writeUserData(userId, email, favorites) {
   });
 }
 
+function changePassword() {
+    if (!firebase.apps.length) {
+        initApp();
+    }
+    setTimeout(function() {
+        user = firebase.auth().currentUser;
+        console.log(user);
+    }, 1000);
+    // var user = firebase.auth().currentUser;
+    // console.log(user);
+    setTimeout(function() {
+        // var oldPassword = document.getElementById('oldPassword').value;
+        var newPassword = document.getElementById('newPassword').value;
+        if (!newPassword) {
+            alert("Please provide New Password")
+        }
+        var newPasswordConfirmed = document.getElementById('newPasswordConfirmed').value;
+        if (!newPasswordConfirmed) {
+            alert("Please confirm New Password")
+        }
+        if (newPassword != newPasswordConfirmed) {
+            alert("Passwords do not match")
+        }
+        // console.log("Stare haslo " + oldPassword);
+        console.log("Nowe haslo " + newPassword);
+        console.log("Nowe haslo potwierdzone " + newPasswordConfirmed);
+        user.updatePassword(newPassword).then(function() {
+          // Update successful.
+          window.setTimeout(function() {
+              location.href = document.referrer;
+          }, 100);
+            }, function(error) {
+          // An error happened.
+        });
+    }, 2000);
+}
+
 function toggleSignIn() {
     if (!firebase.apps.length) {
         initApp();
@@ -204,6 +241,7 @@ function singOut() {
 }
 
 
-document.getElementById('singIn').addEventListener('click', e => toggleSignIn(), true);
-document.getElementById('singUp').addEventListener('click', e => handleSignUp(), true);
-document.getElementById('passReset').addEventListener('click', e => sendPasswordReset(), true);
+// document.getElementById('singIn').addEventListener('click', e => toggleSignIn(), true);
+// document.getElementById('singUp').addEventListener('click', e => handleSignUp(), true);
+// document.getElementById('passReset').addEventListener('click', e => sendPasswordReset(), true);
+// document.getElementById('changePassword').addEventListener('click', e => sendPasswordReset(), true);

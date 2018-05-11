@@ -71,7 +71,9 @@
                     <div id='profileEmail'>
                         Email:
                     </div>
-    				<a href="#passwordPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Change password</a>
+                    <div id="changePassword">
+        				<a href="#passwordPage" style="background:#0070c0; color:white" class="ui-btn ui-corner-all">Change password</a>
+                    </div>
     				<hr color="#0070c0">
     				Your categories of attractions:
     				<form>
@@ -92,5 +94,11 @@
                     </div>
     			</div>
     		</div>
+            <script>
+            $( "#changePassword" ).click(function() {
+                // toggleSignInFacebook();
+                document.location.href = 'changePassword.html';
+            });
+            </script>
     </body>
 </html>
