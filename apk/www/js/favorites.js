@@ -139,7 +139,7 @@ function saveFavorites() {
     editFavorites(userId, userEmail, newFavorites);
     window.setTimeout(function() {
         location.href = document.referrer;
-    }, 5000);
+    }, 1000);
     // document.location.href = 'afterLogin2.html';
 }
 

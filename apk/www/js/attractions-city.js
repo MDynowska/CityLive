@@ -14,6 +14,10 @@ var countryRestrict = {'country': 'pl'};
 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
+var userId = localStorage.getItem('userId')
+var userEmail = localStorage.getItem('userEmail')
+var g_favoritesDB = [];
+
 var countries = {
   'au': {
     center: {lat: -25.3, lng: 133.8},
@@ -73,6 +77,57 @@ var countries = {
   }
 };
 
+
+function initApp() {
+    var config = {
+        apiKey: "AIzaSyDtrie9w23IwHBTjv6RsJdOYptna740fY8",
+        authDomain: "fir-tests-504a2.firebaseapp.com",
+        databaseURL: "https://fir-tests-504a2.firebaseio.com",
+        projectId: "fir-tests-504a2",
+        storageBucket: "fir-tests-504a2.appspot.com",
+        messagingSenderId: "440215787226"
+    }
+    firebase.initializeApp(config);
+}
+
+function addFavorite(favorite) {
+    console.log(favorite);
+    var favorites = [];
+    g_favoritesDB.push(favorite);
+    // g_favoritesDB = favorites;
+    console.log(g_favoritesDB)
+    // var favoriteBox = document.getElementById(favorite);
+    // favorites.indexOf(favorite) != -1 ? favoriteBox.checked = true : console.log("Nie ma" + favorite);
+    // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
+}
+
+function getUserFavorites(userId) {
+    if (!firebase.apps.length) {
+        initApp();
+    }
+    // var userLogged = firebase.auth().getUid();
+    // console.log(userLogged);
+    // console.log(userId);
+    var userFavorites = firebase.database().ref('users/' + userId);
+    userFavorites.once('value', function(snapshot) {
+        console.log(favorites);
+        var favorites = snapshot.val().favorites;
+        favorites.forEach(function(favorite) {
+            // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
+                // var favorites = childSnapshot.val().favorites;
+                // console.log(childSnapshot.val())
+                // console.log(favorite);
+                addFavorite(favorite);
+                // checkBoxFavorite(favorite, categories)
+                // localStorage.setItem('cinema', '1')
+        })
+        search();
+        // console.log(snapshot.val().favorites);
+        // let userFavorites = snapshot.val().favorites;
+        // return userFavorites;
+    });
+};
+
 function initMapCity() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: countries['pl'].zoom,
@@ -111,7 +166,11 @@ function onPlaceChanged() {
   if (place.geometry) {
     map.panTo(place.geometry.location);
     map.setZoom(15);
-    search();
+    getUserFavorites(userId);
+    g_favoritesDB.forEach(function(favorite) {
+        search(favorite);
+    })
+    // search();
   } else {
     document.getElementById('autocomplete').placeholder = 'Enter a city';
   }
@@ -119,6 +178,9 @@ function onPlaceChanged() {
 
 // Search for hotels in the selected city, within the viewport of the map.
 function search() {
+  // window.setTimeout(function() {
+  //     getUserFavorites(userId), 2000});
+  // alert(g_favoritesDB);
   var search = {
     bounds: map.getBounds(),
     types: ['museum']
@@ -132,7 +194,7 @@ function search() {
       // Create a marker for each hotel found, and
       // assign a letter of the alphabetic to each marker icon.
       // for (var i = 0; i < results.length; i++) {
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 3; i++) {
         var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
         var markerIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
         // Use marker animation to drop the icons incrementally on the map.
@@ -145,7 +207,7 @@ function search() {
         // in an info window.
         markers[i].placeResult = results[i];
         google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-        setTimeout(dropMarker(i), i * 100);
+        setTimeout(dropMarker(i), i * 200);
         addResult(results[i], i);
       }
     }

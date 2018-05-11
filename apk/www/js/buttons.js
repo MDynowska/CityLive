@@ -191,7 +191,7 @@ $( document ).ready(function() {
         // getUserFavorites(userId);
         window.setTimeout(function() {
             location.href = 'profilePage.html';
-        }, 5000);
+        }, 2000);
     });
     $( "#logOut" ).click(function() {
         singOut();
