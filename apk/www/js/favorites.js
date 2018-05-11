@@ -26,52 +26,18 @@ function checkUncheck(box) {
     }
     console.log(newFavorites);
 }
-//
-// function check(box) {
-//     if($(box.checked)) {
-//         console.log(box['name'] + " Checked");
-//         favorites.indexOf(box['name']) === -1 ? favorites.push(box['name']) : console.log("This item already exists");
-//         // favorites.push(box['name']);
-//         console.log(favorites);
-//     } else {
-//         console.log(box['name'] + " Unchecked");
-//         var favoriteIndex = favorites.indexOf(box['name']);
-//         if (favoriteIndex < 1) {
-//             favorites.splice(favoriteIndex, 1);
-//         } else {
-//             console.log("This item is not in favorites");
-//         }
-//         console.log(favorites);
-//         favorites.indexOf(box['name']) != -1 ? favorites.push(box['name']) : console.log("This item already exists");
-//         // Checkbox is not checked..
-//     }
-// }
-//
-// function uncheck(box) {
-//     if($(!box.checked)) {
-//         console.log(box['name'] + " Unchecked");
-//         var favoriteIndex = favorites.indexOf(box['name']);
-//         if (favoriteIndex < 1) {
-//             favorites.splice(favoriteIndex, 1);
-//         } else {
-//             console.log("This item is not in favorites");
-//         }
-//         console.log(favorites);
-//         favorites.indexOf(box['name']) != -1 ? favorites.push(box['name']) : console.log("This item already exists");
-//     }
-// }
-//
+
 $( document ).ready(function() {
     $('input').change(function() {
         var checkboxName = this['name'];
         switch(checkboxName) {
-            case 'cinemas':
+            case 'movie_theater':
                 // console.log(checkboxName);
                 checkUncheck(this);
                 // check(this);
                 // uncheck(this);
                 break;
-            case 'museums':
+            case 'museum':
                 checkUncheck(this);
                 break;
             case 'spa':
@@ -89,7 +55,7 @@ $( document ).ready(function() {
             case 'cafe':
                 checkUncheck(this);
                 break;
-            case 'art':
+            case 'art_gallery':
                 checkUncheck(this);
                 break;
         }
@@ -120,15 +86,6 @@ function editFavorites(userId, userEmail, newFavorites) {
     if (!firebase.apps.length) {
         initApp();
     }
-    // var userId = userId
-    // var email = userEmail;
-    // var favorites = favorites;
-    // var email = userEmail;
-    // if (!userId) {
-    //     setTimeout(function() {
-    //         firebase.auth().getUid();
-    //     }, 100);
-    // }
     writeUserData(userId, userEmail, newFavorites);
 }
 
@@ -137,93 +94,9 @@ function saveFavorites() {
     console.log(newFavorites);
     // alert("Those categories were added to Your user Profile: \n" + newFavorites)
     editFavorites(userId, userEmail, newFavorites);
-    window.setTimeout(function() {
-        location.href = document.referrer;
-    }, 1000);
+    history.back();
+    // window.setTimeout(function() {
+    //     location.href = document.referrer;
+    // }, 1000);
     // document.location.href = 'afterLogin2.html';
 }
-
-// function saveFavorites() {
-//     var favorites = [];
-//     // if($('input[cinemas]').is(':checked')) {
-//     if (document.getElementById("cinemas").checked = true) {
-//         // console.log(cinemas);
-//         favorites.push("cinemas")
-//     } else {
-//         var favoriteIndex = favorites.indexOf("cinemas");
-//         if (favoriteIndex < 1) {
-//             favorites.splice(favoriteIndex, 1);
-//         }
-//     }
-    // // if($('input[museums]').is(':checked')) {
-    // if (document.getElementById("museums").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("museums")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("museums");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[spa]').is(':checked')) {
-    // // if (document.getElementsByName("spa").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("spa")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("spa");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[restaurant]').is(':checked')) {
-    // // if (document.getElementsByName("restaurant").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("restaurant")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("restaurant");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[gym]').is(':checked')) {
-    // // if (document.getElementsByName("gym").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("gym")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("gym");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[zoo]').is(':checked')) {
-    // // if (document.getElementsByName("zoo").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("zoo")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("zoo");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[cafe]').is(':checked')) {
-    // // if (document.getElementsByName("cafe").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("cafe")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("cafe");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-    // if($('input[art]').is(':checked')) {
-    // // if (document.getElementsByName("art").checked = true) {
-    //     // console.log(cinemas);
-    //     favorites.push("art")
-    // } else {
-    //     var favoriteIndex = favorites.indexOf("art");
-    //     if (favoriteIndex < 1) {
-    //         favorites.splice(favoriteIndex, 1);
-    //     }
-    // }
-//     console.log(favorites);
-// }

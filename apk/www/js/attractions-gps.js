@@ -100,6 +100,8 @@ function initMapNear() {
         })
     });
 
+    getUserFavorites(userId);
+
     // marker_lokalizacja.addListener('click', console.log(address));
     // marker_lokalizacja.addListener('click',
     //     geocoder.geocode({ 'latLng': lokalizacja }, function (results, status) {
@@ -121,7 +123,8 @@ function initMapNear() {
 
     places = new google.maps.places.PlacesService(map);
     console.log(places);
-    google.maps.event.addListener(map, 'bounds_changed', function() {
+    // google.maps.event.addListener(map, 'bounds_changed', function() {
+    google.maps.event.addListener(searchNear, 'click', function() {
         // alert(map.getBounds());
         // clearMarkers();
         // clearResults();

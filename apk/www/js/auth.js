@@ -79,7 +79,7 @@ function changePassword() {
           // Update successful.
           alert("Password Changed")
           window.setTimeout(function() {
-              location.href = document.referrer;
+              history.back();
           }, 100);
             }, function(error) {
           alert(error.message)

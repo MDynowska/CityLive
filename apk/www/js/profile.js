@@ -16,56 +16,9 @@ function initApp() {
     firebase.initializeApp(config);
 }
 
-// function getUserFavorites(userId) {
-//     if (!firebase.apps.length) {
-//         initApp();
-//     }
-//     // var userLogged = firebase.auth().getUid();
-//     // console.log(userLogged);
-//     // console.log(userId);
-//     var userFavorites = firebase.database().ref('users/' + userId);
-//     userFavorites.once('value', function(snapshot) {
-//         console.log(snapshot.val().favorites);
-//         // let userFavorites = snapshot.val().favorites;
-//         // return userFavorites;
-//     });
-// };
 
 
-// var userFavorites = getUserFavorites(userId);
-
-
-// var getCategories = new Promise(function(resolve, reject) {
-//     if (!firebase.apps.length) {
-//         initApp();
-//     }
-//     var categories = firebase.database().ref('categories');
-//     categories.once('value', function(snapshot) {
-//         categories = snapshot.val();
-//         if (categories) {
-//             resolve(categories);
-//         } else {
-//             var reason = new Error("Nie udalo sie");
-//             reject(reason);
-//         }
-//         });
-// });
-//
-//
-// var categoriesDb = function() {
-//     getCategories.then(function(result) {
-//         console.log(result);
-//     })
-//     .catch(function(error) {
-//         console.log(error.message)
-//     });
-// };
-
-
-
-
-
-var categories = ['cinemas', 'museums', 'spa', 'restaurant', 'gym', 'zoo', 'cafe', 'art']
+var categories = ['movie_theater', 'museum', 'spa', 'restaurant', 'gym', 'zoo', 'cafe', 'art_gallery']
 
 function checkBoxFavorite(favorite, favorites) {
     console.log(favorite);
@@ -105,30 +58,4 @@ $( document ).ready(function() {
     $( "#selectAttractionsCategory" ).click(function() {
             document.location.href = 'categories.html';
     })
-    // let categoriesDB = getUserFavorites();
-    // categories.forEach(function(category) {
-    //     console.log(category);
-    //     // checkFavorite(category, categoriesDB)
-    // });
-    // checkFavorite('')
-    // setTimeout(getCategories(), 2000);
-    // window.setTimeout(2000);
-    // console.log(g_userFavoritesDB);
-    // var checkCinemas = document.getElementById('cinemas');
-    // var checkMuseusm = document.getElementById('museums');
-    // var checkSpa = document.getElementById('spa');
-    // var checkRestaurants = document.getElementById('restaurants');
-    // var checkGym = document.getElementById('gym');
-    // var checkZoo = document.getElementById('zoo');
-    // var checkCafe = document.getElementById('cafe');
-    // var checkArt = document.getElementById('art');
-    // // getUserFavorites(userId);
-    // var favoritesDB = categoriesDb();
-    // console.log(g_userFavoritesDB);
-    // userFavoritesDB.indexOf('cinemas') != -1 ? checkCinemas : console.log("Ma kino");
-    // userFavoritesDB.indexOf('art') != -1 ? checkMuseusm.checked = true; : checkMuseusm.checked = false;
-    // userFavorites.indexOf('cinemas') === -1 ? $("#cinemas").prop("checked", true) : console.log('test')
-    // var category = '';
-    // switch(category) {
-    //     case 'cinemas';
 });

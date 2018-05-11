@@ -17,65 +17,7 @@ var hostnameRegexp = new RegExp('^https?://.+?/');
 var userId = localStorage.getItem('userId')
 var userEmail = localStorage.getItem('userEmail')
 var g_favoritesDB = [];
-
-var countries = {
-  'au': {
-    center: {lat: -25.3, lng: 133.8},
-    zoom: 4
-  },
-  'br': {
-    center: {lat: -14.2, lng: -51.9},
-    zoom: 3
-  },
-  'ca': {
-    center: {lat: 62, lng: -110.0},
-    zoom: 3
-  },
-  'fr': {
-    center: {lat: 46.2, lng: 2.2},
-    zoom: 5
-  },
-  'de': {
-    center: {lat: 51.2, lng: 10.4},
-    zoom: 5
-  },
-  'mx': {
-    center: {lat: 23.6, lng: -102.5},
-    zoom: 4
-  },
-  'nz': {
-    center: {lat: -40.9, lng: 174.9},
-    zoom: 5
-  },
-  'it': {
-    center: {lat: 41.9, lng: 12.6},
-    zoom: 5
-  },
-  'za': {
-    center: {lat: -30.6, lng: 22.9},
-    zoom: 5
-  },
-  'es': {
-    center: {lat: 40.5, lng: -3.7},
-    zoom: 5
-  },
-  'pt': {
-    center: {lat: 39.4, lng: -8.2},
-    zoom: 6
-  },
-  'us': {
-    center: {lat: 37.1, lng: -95.7},
-    zoom: 3
-  },
-  'uk': {
-    center: {lat: 54.8, lng: -4.6},
-    zoom: 5
-  },
-  'pl': {
-    center: {lat: 51.9, lng: 19.1},
-    zoom: 5
-  }
-};
+var g_lokalizacja;
 
 
 function initApp() {
@@ -90,18 +32,18 @@ function initApp() {
     firebase.initializeApp(config);
 }
 
-function addFavorite(favorite, favorites) {
-    console.log("Z add Favorite favortesDB " + favorites);
-    console.log("Z add Favorite " + favorite);
-    // var favorites = [];
-    g_favoritesDB.indexOf(favorite) != -1 ? g_favoritesDB.push(favorite) : console.log("Juz jest dodane " + favorite);
-    // g_favoritesDB.push(favorite);
-    // g_favoritesDB = favorites;
-    // console.log(g_favoritesDB)
-    // var favoriteBox = document.getElementById(favorite);
-    // favorites.indexOf(favorite) != -1 ? favoriteBox.checked = true : console.log("Nie ma" + favorite);
-    // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
-}
+// function addFavorite(favorite, favorites) {
+//     console.log("Z add Favorite favortesDB " + favorites);
+//     console.log("Z add Favorite " + favorite);
+//     // var favorites = [];
+//     g_favoritesDB.indexOf(favorite) != -1 ? g_favoritesDB.push(favorite) : console.log("Juz jest dodane " + favorite);
+//     // g_favoritesDB.push(favorite);
+//     // g_favoritesDB = favorites;
+//     // console.log(g_favoritesDB)
+//     // var favoriteBox = document.getElementById(favorite);
+//     // favorites.indexOf(favorite) != -1 ? favoriteBox.checked = true : console.log("Nie ma" + favorite);
+//     // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
+// }
 
 function getUserFavorites(userId) {
     if (!firebase.apps.length) {
@@ -114,13 +56,14 @@ function getUserFavorites(userId) {
     userFavorites.once('value', function(snapshot) {
         // console.log(favorites);
         var favorites = snapshot.val().favorites;
-        console.log(favorites);
+        console.log("Z user getUserFovirtes " + favorites);
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
                 // var favorites = childSnapshot.val().favorites;
                 // console.log(childSnapshot.val())
-                console.log(favorite);
-                search(favorite);
+                console.log("Z user getUserFovirtes " + favorite);
+                window.setTimeout(function() {
+                    search(favorite), 1000});
                 // addFavorite(favorite, favorites);
                 // checkBoxFavorite(favorite, categories)
                 // localStorage.setItem('cinema', '1')
@@ -132,72 +75,64 @@ function getUserFavorites(userId) {
     });
 };
 
-function initMapCity() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: countries['pl'].zoom,
-    center: countries['pl'].center,
-    mapTypeControl: false,
-    panControl: false,
-    zoomControl: false,
-    streetViewControl: false
-  });
+function initMapNear() {
+    clearResults();
+    clearMarkers();
+    var lat = localStorage.getItem('lat')
+    var lng = localStorage.getItem('lng')
+    var lokalizacja = new google.maps.LatLng(lat, lng);
+    map = new google.maps.Map(document.getElementById('map'), {
+      // zoom: countries['pl'].zoom,
+      zoom: 15,
+      // center: countries['pl'].center,
+      // center: krakow
+      center: lokalizacja,
+      // mapTypeControl: false,
+      // panControl: false,
+      // zoomControl: false,
+      // streetViewControl: false
+    });
 
   infoWindow = new google.maps.InfoWindow({
     content: document.getElementById('info-content')
   });
 
-  // Create the autocomplete object and associate it with the UI input control.
-  // Restrict the search to the default country, and to place type "cities".
-  autocomplete = new google.maps.places.Autocomplete(
-      /** @type {!HTMLInputElement} */ (
-          document.getElementById('autocomplete')), {
-        types: ['(cities)'],
-        componentRestrictions: countryRestrict
-      });
-  places = new google.maps.places.PlacesService(map);
 
-  autocomplete.addListener('place_changed', onPlaceChanged);
+    var lat = localStorage.getItem('lat')
+    var lng = localStorage.getItem('lng')
+    var lokalizacja = new google.maps.LatLng(lat, lng);
+    console.log(lokalizacja);
 
-  // Add a DOM event listener to react when the user selects a country.
-  // document.getElementById('country').addEventListener(
-  //     'change', setAutocompleteCountry);
-}
+    var geocoder = new google.maps.Geocoder();
+    function getAddres(param) {
+        geocoder.geocode({ 'latLng': param }, function (results, status) {
+            if (status !== google.maps.GeocoderStatus.OK) {
+                alert(status);
+            }
+            // This is checking to see if the Geoeode Status is OK before proceeding
+            if (status == google.maps.GeocoderStatus.OK) {
+                // console.log(results);
+                // var address = (results[0].formatted_address);
+                var address = (results[0].formatted_address);
+                console.log(address);
+            }
+        });
+    }
 
-// When the user selects a city, get the place details for the city and
-// zoom the map in on the city.
-// function multiSearch() {
-//     g_favoritesDB.forEach(function(favorite) {
-//         console.log("onPlaceChanged " + favorite);
-//         search(favorite);
-//     });
-// }
+    var address = getAddres(lokalizacja);
+    var marker_lokalizacja = new google.maps.Marker({
+          position: lokalizacja,
+          map: map,
+          title: 'Hello World!'
+        });
 
-function onPlaceChanged() {
-  var place = autocomplete.getPlace();
-  if (place.geometry) {
-    map.panTo(place.geometry.location);
-    map.setZoom(15);
     getUserFavorites(userId);
-    // multiSearch();
-    clearResults();
-    clearMarkers();
-    // g_favoritesDB.forEach(search(favorite) {
-    //     console.log("onPlaceChanged " + favorite);
-    // });
-    // g_favoritesDB.forEach(function(favorite) {
-    //     console.log("onPlaceChanged " + favorite);
-    //     search(favorite);
-    // });
-  } else {
-    document.getElementById('autocomplete').placeholder = 'Enter a city';
-  }
 }
+
 
 // Search for hotels in the selected city, within the viewport of the map.
 function search(type) {
-  // window.setTimeout(function() {
-  //     getUserFavorites(userId), 2000});
-  // alert(g_favoritesDB);
+
   console.log("Z searcha " + type);
   var search = {
     bounds: map.getBounds(),
@@ -244,20 +179,20 @@ function clearMarkers() {
 
 // Set the country restriction based on user input.
 // Also center and zoom the map on the given country.
-function setAutocompleteCountry() {
-  var country = document.getElementById('country').value;
-  if (country == 'all') {
-    autocomplete.setComponentRestrictions({'country': []});
-    map.setCenter({lat: 15, lng: 0});
-    map.setZoom(2);
-  } else {
-    autocomplete.setComponentRestrictions({'country': country});
-    map.setCenter(countries[country].center);
-    map.setZoom(countries[country].zoom);
-  }
-  clearResults();
-  clearMarkers();
-}
+// function setAutocompleteCountry() {
+//   var country = document.getElementById('country').value;
+//   if (country == 'all') {
+//     autocomplete.setComponentRestrictions({'country': []});
+//     map.setCenter({lat: 15, lng: 0});
+//     map.setZoom(2);
+//   } else {
+//     autocomplete.setComponentRestrictions({'country': country});
+//     map.setCenter(countries[country].center);
+//     map.setZoom(countries[country].zoom);
+//   }
+//   clearResults();
+//   clearMarkers();
+// }
 
 function dropMarker(i) {
   return function() {
@@ -360,3 +295,8 @@ function buildIWContent(place) {
     document.getElementById('iw-website-row').style.display = 'none';
   }
 }
+// g_favoritesDB.forEach(function(favorite) {
+//     console.log("onPlaceChanged " + favorite);
+//     search(favorite);
+// });
+// }
