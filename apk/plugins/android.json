@@ -27,6 +27,18 @@
     },
     "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.krakow.uek.CityLive"
     }
   },
   "dependent_plugins": {}

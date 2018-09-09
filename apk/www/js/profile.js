@@ -27,29 +27,45 @@ function checkBoxFavorite(favorite, favorites) {
     // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
 }
 
+// function getUserFavorites(userId) {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     // var userLogged = firebase.auth().getUid();
+//     // console.log(userLogged);
+//     // console.log(userId);
+//     var userFavorites = firebase.database().ref('users/' + userId);
+//     userFavorites.once('value', function(snapshot) {
+//         var favorites = snapshot.val().favorites;
+//         if (favorites) {
+//             favorites.forEach(function(favorite) {
+//                 // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
+//                     // var favorites = childSnapshot.val().favorites;
+//                     // console.log(childSnapshot.val())
+//                     console.log(favorite);
+//                     checkBoxFavorite(favorite, categories)
+//                     // localStorage.setItem('cinema', '1')
+//             })
+//         }
+//         // console.log(snapshot.val().favorites);
+//         // let userFavorites = snapshot.val().favorites;
+//         // return userFavorites;
+//     });
+// };
+
 function getUserFavorites(userId) {
     if (!firebase.apps.length) {
         initApp();
     }
-    // var userLogged = firebase.auth().getUid();
-    // console.log(userLogged);
-    // console.log(userId);
     var userFavorites = firebase.database().ref('users/' + userId);
-    userFavorites.once('value', function(snapshot) {
+    userFavorites.once('value', snapshot => {
         var favorites = snapshot.val().favorites;
         if (favorites) {
             favorites.forEach(function(favorite) {
-                // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
-                    // var favorites = childSnapshot.val().favorites;
-                    // console.log(childSnapshot.val())
                     console.log(favorite);
                     checkBoxFavorite(favorite, categories)
-                    // localStorage.setItem('cinema', '1')
             })
         }
-        // console.log(snapshot.val().favorites);
-        // let userFavorites = snapshot.val().favorites;
-        // return userFavorites;
     });
 };
 

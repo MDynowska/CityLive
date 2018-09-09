@@ -47,7 +47,7 @@ function initApp() {
 //     // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
 // }
 
-function getUserFavorites(userId) {
+function searchFavorites() {
     if (!firebase.apps.length) {
         initApp();
     }
@@ -55,21 +55,23 @@ function getUserFavorites(userId) {
     // console.log(userLogged);
     // console.log(userId);
     var userFavorites = firebase.database().ref('users/' + userId);
-    userFavorites.once('value', function(snapshot) {
+    // userFavorites.once('value', function(snapshot) {
+    userFavorites.once('value', snapshot => {
         // console.log(favorites);
         var favorites = snapshot.val().favorites;
         if (!favorites) {
             alert("You do not have any categories set, please set them first")
             window.location.href = 'categories.html';
         }
-        console.log("Z user getUserFovirtes " + favorites);
+        console.log(favorites);
+        // clearResults();
+        // clearMarkers();
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
                 // var favorites = childSnapshot.val().favorites;
                 // console.log(childSnapshot.val())
-                console.log("Z user getUserFovirtes " + favorite);
-                window.setTimeout(function() {
-                    search(favorite), 1000});
+                console.log(favorite);
+                search(favorite);
                 // addFavorite(favorite, favorites);
                 // checkBoxFavorite(favorite, categories)
                 // localStorage.setItem('cinema', '1')
@@ -132,7 +134,10 @@ function initMapNear() {
           title: 'Hello World!'
         });
 
-    getUserFavorites(userId);
+    google.maps.event.addListener(map, 'bounds_changed', searchFavorites);
+    // clearResults();
+    // clearMarkers();
+    // getUserFavorites(userId);
 }
 
 
@@ -231,11 +236,16 @@ function addResult(result, i) {
   icon.setAttribute('class', 'placeIcon');
   icon.setAttribute('className', 'placeIcon');
   var name = document.createTextNode(result.name);
-  iconTd.appendChild(icon);
-  nameTd.appendChild(name);
-  tr.appendChild(iconTd);
-  tr.appendChild(nameTd);
-  results.appendChild(tr);
+  iconTd.insertBefore(icon);
+  nameTd.insertBefore(name);
+  tr.insertBefore(iconTd);
+  tr.insertBefore(nameTd);
+  results.insertBefore(tr);
+  // iconTd.appendChild(icon);
+  // nameTd.appendChild(name);
+  // tr.appendChild(iconTd);
+  // tr.appendChild(nameTd);
+  // results.appendChild(tr);
 }
 
 function clearResults() {

@@ -2,10 +2,10 @@
 <widget id="com.krakow.uek.CityLive" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>CityLive</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Appliction that get nearby attractions
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="piotrek.slawek@gmail.com" href="https://mdynowska.github.io/CityLive/">
+        UEK Team
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
@@ -16,6 +16,10 @@
     <plugin name="cordova-plugin-whitelist" spec="*" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="*" />
     <plugin name="cordova.plugins.diagnostic" spec="*" />
+    <plugin name="cordova-plugin-buildinfo" spec="^2.0.2" />
+    <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
+    <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

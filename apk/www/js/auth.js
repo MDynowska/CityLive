@@ -32,35 +32,40 @@ function initApp() {
 }
 
 // Funkcje bazy danych
+// function addUserDB(userId, email) {
+//   firebase.database().ref('users/' + userId).set({
+//     email: email,
+//   });
+//   window.setTimeout(function() {
+//       location.href = "index.html";
+//   }, 5000);
+// }
+
 function addUserDB(userId, email) {
   firebase.database().ref('users/' + userId).set({
     email: email,
-  });
-  window.setTimeout(function() {
-      location.href = "index.html";
-  }, 5000);
-}
-
-
-function writeUserData(userId, email, favorites) {
-  firebase.database().ref('users/' + userId).set({
-    email: email,
-    favorites: favorites,
-  });
+    }).then(function onSuccess(res) {
+        // window.location.href = "index.html";
+        console.log("user dodany do bazy")
+    });
 }
 
 function changePassword() {
     if (!firebase.apps.length) {
         initApp();
     }
-    setTimeout(function() {
-        user = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // debugger;
+        console.log(user.uid);
+      }
+    // });
+    // user = firebase.auth().currentUser;
+        // debugger;
         console.log(user);
-    }, 1000);
-    // var user = firebase.auth().currentUser;
-    // console.log(user);
-    setTimeout(function() {
-        // var oldPassword = document.getElementById('oldPassword').value;
+        // var user = firebase.auth().currentUser;
+        // console.log(user);
+            // var oldPassword = document.getElementById('oldPassword').value;
         var newPassword = document.getElementById('newPassword').value;
         if (!newPassword) {
             alert("Please provide New Password")
@@ -75,16 +80,18 @@ function changePassword() {
         // console.log("Stare haslo " + oldPassword);
         console.log("Nowe haslo " + newPassword);
         console.log("Nowe haslo potwierdzone " + newPasswordConfirmed);
-        user.updatePassword(newPassword).then(function() {
+        user.updatePassword(newPassword)
+            .then(function onSuccess(res) {
           // Update successful.
-          alert("Password Changed")
-          window.setTimeout(function() {
-              history.back();
-          }, 100);
-            }, function(error) {
-          alert(error.message)
-        });
-    }, 2000);
+                console.log(res);
+                // alert(res.message);
+                alert("Password Changed")
+                window.location.href = "profilePage.html";
+            })
+          .catch(function onError(error){
+              alert(error.message);
+          });
+    });
 }
 
 function toggleSignIn() {
@@ -169,9 +176,9 @@ function handleSignUp() {
             userId = user.uid;
             userEmail = user.email;
             alert("Account Created");
-            addUserDB(userId, userEmail)
+            addUserDB(userId, userEmail);
             // alert("Account Created");
-            // window.location.href = "index.html";
+            window.location.href = "index.html";
             })
         .catch(function(error) {
         // Handle Errors here.

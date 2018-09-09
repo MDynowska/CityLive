@@ -92,20 +92,8 @@ function initApp() {
     firebase.initializeApp(config);
 }
 
-function addFavorite(favorite, favorites) {
-    console.log("Z add Favorite favortesDB " + favorites);
-    console.log("Z add Favorite " + favorite);
-    // var favorites = [];
-    g_favoritesDB.indexOf(favorite) != -1 ? g_favoritesDB.push(favorite) : console.log("Juz jest dodane " + favorite);
-    // g_favoritesDB.push(favorite);
-    // g_favoritesDB = favorites;
-    // console.log(g_favoritesDB)
-    // var favoriteBox = document.getElementById(favorite);
-    // favorites.indexOf(favorite) != -1 ? favoriteBox.checked = true : console.log("Nie ma" + favorite);
-    // favorites.indexOf(favorite) != -1 ? localStorage.setItem(favorite, '1') : localStorage.setItem(favorite, '0')
-}
 
-function getUserFavorites(userId) {
+function searchFavorites() {
     if (!firebase.apps.length) {
         initApp();
     }
@@ -113,7 +101,8 @@ function getUserFavorites(userId) {
     // console.log(userLogged);
     // console.log(userId);
     var userFavorites = firebase.database().ref('users/' + userId);
-    userFavorites.once('value', function(snapshot) {
+    // userFavorites.once('value', function(snapshot) {
+    userFavorites.once('value', snapshot => {
         // console.log(favorites);
         var favorites = snapshot.val().favorites;
         if (!favorites) {
@@ -121,6 +110,8 @@ function getUserFavorites(userId) {
             window.location.href = 'categories.html';
         }
         console.log(favorites);
+        // clearResults();
+        // clearMarkers();
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
                 // var favorites = childSnapshot.val().favorites;
@@ -163,6 +154,7 @@ function initMapCity() {
   places = new google.maps.places.PlacesService(map);
 
   autocomplete.addListener('place_changed', onPlaceChanged);
+  google.maps.event.addListener(map, 'bounds_changed', searchFavorites);
 
   // Add a DOM event listener to react when the user selects a country.
   // document.getElementById('country').addEventListener(
@@ -183,7 +175,8 @@ function onPlaceChanged() {
   if (place.geometry) {
     map.panTo(place.geometry.location);
     map.setZoom(15);
-    getUserFavorites(userId);
+    // searchFavorites(userId);
+    searchFavorites();
     // multiSearch();
     // clearResults();
     // clearMarkers();
