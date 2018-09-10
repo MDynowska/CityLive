@@ -20,6 +20,32 @@ function checkGPS() {
 }
 
 
+function loginWithFB(){
+  facebookConnectPlugin.login(["email"],function(result){
+  // facebookConnectPlugin.login(["public_profile","email", "user_friends"],function(result){
+    //calling api after login success
+     // facebookConnectPlugin.api("/me?fields=email,birthday",
+     facebookConnectPlugin.api("/me?fields=email",
+     // ["public_profile","email", "user_friends"]
+     ["email"]
+     ,function(userData){
+         //API success callback
+         alert(JSON.stringify(userData));
+         // alert(userData["email"])
+         var emailFace = userData["email"]
+         localStorage.setItem('userEmail', emailFace)
+         checkGPS()
+      },function(error){
+         //API error callback
+         alert(JSON.stringify(error));
+      });
+   },function(error){
+      //authenication error callback
+      alert(JSON.stringify(error));
+     });
+}
+
+
 function toggleSignInFacebook() {
   if (!firebase.auth().currentUser) {
     // [START createprovider]
@@ -40,7 +66,10 @@ function toggleSignInFacebook() {
       console.log(emailFace)
       localStorage.setItem('userId', uidFace)
       localStorage.setItem('userEmail', emailFace)
-      checkGPS();
+      alert(uidFace)
+      alert(emailFace)
+      window.location.href='afterLogin2.html';
+      // checkGPS();
       // window.setTimeout(function() {
       //     location.href = "afterLogin2.html";
       // }, 5000);
@@ -64,6 +93,7 @@ function toggleSignInFacebook() {
         // the user's accounts here.
       } else {
         console.error(error);
+        alert(error)
       }
       // [END_EXCLUDE]
     });
