@@ -2,11 +2,11 @@ function checkGPS() {
     function onSuccess(position) {
         var gps_cords = [position.coords.latitude, position.coords.longitude];
         // localStorage.setItem('lokalizacja', gps_cords)
-        console.log("Z getgps - " + gps_cords)
+        console.log("Z getgps - " + gps_cords);
         // var bagry = new google.maps.LatLng(gps_cords[0], [1]);
-        localStorage.setItem('lokalizacja', gps_cords)
-        localStorage.setItem('lat', gps_cords[0])
-        localStorage.setItem('lng', gps_cords[1])
+        localStorage.setItem('lokalizacja', gps_cords);
+        localStorage.setItem('lat', gps_cords[0]);
+        localStorage.setItem('lng', gps_cords[1]);
         // console.log(bagry)
         // g_bagry = bagry;
         window.location.href='afterLogin2.html';
@@ -44,10 +44,16 @@ function initApp() {
 function addUserDB(userId, email) {
   firebase.database().ref('users/' + userId).set({
     email: email,
+    }).catch(function(error) {
+        alert(error)
+        console.log(error)
     }).then(function onSuccess(res) {
-        // window.location.href = "index.html";
+        window.location.href = "index.html";
         console.log("user dodany do bazy")
-    });
+    })
+    // } function onError(error) {
+    //     console.log(error);
+    // });
 }
 
 function changePassword() {
@@ -134,10 +140,13 @@ function toggleSignIn() {
         })
         .then(function(result) {
         // initApp();
-            user_id = result.uid;
-            user_email = result.email;
+            user_id = result.user.uid;
+            user_email = result.user.email;
             localStorage.setItem('userId', user_id);
             localStorage.setItem('userEmail', user_email);
+            console.log("User Result SingIn => " + result);
+            console.log("User ID SingIn => " + user_id);
+            console.log("User Email SingIn => " + user_email);
             // alert(user)
             // console.log("Zalogowano jako: " + email)
             // alert("Logged in as: " + email);
@@ -173,12 +182,15 @@ function handleSignUp() {
     // [START createwithemail]
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function(user) {
-            userId = user.uid;
-            userEmail = user.email;
+            userId = user.user.uid;
+            userEmail = user.user.email;
+            console.log("SingUp User full => " + user);
+            console.log("SingUp User => " + userId);
+            console.log("SingUp Email => " + userEmail);
             alert("Account Created");
             addUserDB(userId, userEmail);
             // alert("Account Created");
-            window.location.href = "index.html";
+            // window.location.href = "index.html";
             })
         .catch(function(error) {
         // Handle Errors here.

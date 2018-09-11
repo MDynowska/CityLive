@@ -20,6 +20,56 @@ function checkGPS() {
 }
 
 
+// function getUserID() {
+//     if (!firebase.apps.length) {
+//         initApp();
+//     }
+//     var users = firebase.database().ref('users');
+//     // console.log(users);
+//     users.orderByChild('email').equalTo("piotrek.slawek@gmail.com").once("value", snapshot => {
+//         // return userId;
+//         console.log(snapshot.val())
+//         snapshot.forEach(function(data) {
+//             (data.key);
+//             var userId = data.key;
+//             console.log("Z GetUserID " + userId)
+//             localStorage.setItem('userId', userId);
+//             console.log(localStorage.getItem("userId"));
+//             // console.log(userID)
+//             // return userId;
+//         });
+//     });
+// };
+
+
+function getUserID() {
+    if (!firebase.apps.length) {
+        initApp();
+    }
+    firebase.database().ref('users').orderByChild('email')
+    .equalTo("piotrek.slawek@gmail.com")
+    .once("value", snapshot => {
+        // return userId;
+        // console.log(snapshot.val())
+        snapshot.forEach(function(data) {
+            var userId = data.key;
+            localStorage.setItem('userId', userId);
+            console.log("User ID z Face -> " + userId);
+            // console.log(data.key);
+        });
+    }).catch(function onError(error) {
+        console.log(error);
+        alert(error);
+    })
+    .then(function onSuccess(res) {
+        // console.log(userId);
+        // alert(userId);
+        // localStorage.setItem('userId', userId);
+        checkGPS();
+    });
+};
+
+
 function loginWithFB(){
   facebookConnectPlugin.login(["email"],function(result){
   // facebookConnectPlugin.login(["public_profile","email", "user_friends"],function(result){
@@ -30,11 +80,24 @@ function loginWithFB(){
      ["email"]
      ,function(userData){
          //API success callback
-         alert(JSON.stringify(userData));
+         // alert(JSON.stringify(userData));
          // alert(userData["email"])
-         var emailFace = userData["email"]
-         localStorage.setItem('userEmail', emailFace)
-         checkGPS()
+         // var userIdFace = userData["id"]
+         var userEmailFace = userData["email"];
+         // localStorage.setItem('userId', userIdFace)
+         localStorage.setItem('userEmail', userEmailFace);
+         // var users = firebase.database().ref('users');
+         // users.orderByChild('email').equalTo(userEmailFace).once("value", function(snapshot) {
+         //     console.log(snapshot.val());
+         //     snapshot.forEach(function(data) {
+         //         console.log("Firebase Facebook => " + data.key);
+         //         // var userIdFirebase = data.key;
+         //         // console.log(userIdFirebase)
+         //     });
+         // });
+         getUserID();
+         // localStorage.getItem('userId');
+         checkGPS();
       },function(error){
          //API error callback
          alert(JSON.stringify(error));

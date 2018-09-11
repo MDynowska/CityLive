@@ -2,6 +2,8 @@
 var newFavorites = [];
 var userId = localStorage.getItem('userId')
 var userEmail = localStorage.getItem('userEmail')
+console.log(userId)
+console.log(userEmail)
 // var userFavoritesNew = localStorage.getItem('userFavoritesNew')
 
 function checkUncheck(box) {
