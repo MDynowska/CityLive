@@ -100,6 +100,8 @@ function searchFavorites() {
     // var userLogged = firebase.auth().getUid();
     // console.log(userLogged);
     // console.log(userId);
+    clearMarkers();
+    clearResults();
     var userFavorites = firebase.database().ref('users/' + userId);
     // userFavorites.once('value', function(snapshot) {
     userFavorites.once('value', snapshot => {
@@ -129,6 +131,8 @@ function searchFavorites() {
     });
 };
 
+
+
 function initMapCity() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: countries['pl'].zoom,
@@ -155,6 +159,8 @@ function initMapCity() {
 
   autocomplete.addListener('place_changed', onPlaceChanged);
   google.maps.event.addListener(map, 'bounds_changed', searchFavorites);
+  // clearResults();
+  // clearMarkers();
 
   // Add a DOM event listener to react when the user selects a country.
   // document.getElementById('country').addEventListener(
@@ -176,6 +182,8 @@ function onPlaceChanged() {
     map.panTo(place.geometry.location);
     map.setZoom(15);
     // searchFavorites(userId);
+    // clearResults();
+    // clearMarkers();
     searchFavorites();
     // multiSearch();
     // clearResults();

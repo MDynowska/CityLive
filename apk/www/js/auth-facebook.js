@@ -42,7 +42,7 @@ function checkGPS() {
 // };
 
 
-function getUserID() {
+function getUserID(email) {
     if (!firebase.apps.length) {
         initApp();
     }
@@ -95,7 +95,7 @@ function loginWithFB(){
          //         // console.log(userIdFirebase)
          //     });
          // });
-         getUserID();
+         getUserID(userEmailFace);
          // localStorage.getItem('userId');
          checkGPS();
       },function(error){
@@ -109,68 +109,68 @@ function loginWithFB(){
 }
 
 
-function toggleSignInFacebook() {
-  if (!firebase.auth().currentUser) {
-    // [START createprovider]
-    var provider = new firebase.auth.FacebookAuthProvider();
-    // [END createprovider]
-    // [START addscopes]
-    provider.addScope('user_birthday');
-    // [END addscopes]
-    // [START signin]
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var userFace = result.user;
-      var uidFace = userFace['providerData'][0]['uid']
-      console.log(uidFace)
-      var emailFace = result.user['providerData'][0]['email']
-      console.log(emailFace)
-      localStorage.setItem('userId', uidFace)
-      localStorage.setItem('userEmail', emailFace)
-      alert(uidFace)
-      alert(emailFace)
-      window.location.href='afterLogin2.html';
-      // checkGPS();
-      // window.setTimeout(function() {
-      //     location.href = "afterLogin2.html";
-      // }, 5000);
-
-      // [START_EXCLUDE]
-      // document.getElementById('quickstart-oauthtoken').textContent = token;
-      // [END_EXCLUDE]
-      // document.location.href = 'afterLogin2.html';
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // [START_EXCLUDE]
-      if (errorCode === 'auth/account-exists-with-different-credential') {
-        alert('You have already signed up with a different auth provider for that email.');
-        // If you are using multiple auth providers on your app you should handle linking
-        // the user's accounts here.
-      } else {
-        console.error(error);
-        alert(error)
-      }
-      // [END_EXCLUDE]
-    });
-    // [END signin]
-  } else {
-    // [START signout]
-    firebase.auth().signOut();
-    // [END signout]
-  }
-  // [START_EXCLUDE]
-  // document.getElementById('quickstart-sign-in').disabled = true;
-  // [END_EXCLUDE]
-}
-// [END buttoncallback]
+// function toggleSignInFacebook() {
+//   if (!firebase.auth().currentUser) {
+//     // [START createprovider]
+//     var provider = new firebase.auth.FacebookAuthProvider();
+//     // [END createprovider]
+//     // [START addscopes]
+//     provider.addScope('user_birthday');
+//     // [END addscopes]
+//     // [START signin]
+//     firebase.auth().signInWithPopup(provider).then(function(result) {
+//       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+//       var token = result.credential.accessToken;
+//       // The signed-in user info.
+//       var userFace = result.user;
+//       var uidFace = userFace['providerData'][0]['uid']
+//       console.log(uidFace)
+//       var emailFace = result.user['providerData'][0]['email']
+//       console.log(emailFace)
+//       localStorage.setItem('userId', uidFace)
+//       localStorage.setItem('userEmail', emailFace)
+//       alert(uidFace)
+//       alert(emailFace)
+//       window.location.href='afterLogin2.html';
+//       // checkGPS();
+//       // window.setTimeout(function() {
+//       //     location.href = "afterLogin2.html";
+//       // }, 5000);
+//
+//       // [START_EXCLUDE]
+//       // document.getElementById('quickstart-oauthtoken').textContent = token;
+//       // [END_EXCLUDE]
+//       // document.location.href = 'afterLogin2.html';
+//     }).catch(function(error) {
+//       // Handle Errors here.
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       // The email of the user's account used.
+//       var email = error.email;
+//       // The firebase.auth.AuthCredential type that was used.
+//       var credential = error.credential;
+//       // [START_EXCLUDE]
+//       if (errorCode === 'auth/account-exists-with-different-credential') {
+//         alert('You have already signed up with a different auth provider for that email.');
+//         // If you are using multiple auth providers on your app you should handle linking
+//         // the user's accounts here.
+//       } else {
+//         console.error(error);
+//         alert(error)
+//       }
+//       // [END_EXCLUDE]
+//     });
+//     // [END signin]
+//   } else {
+//     // [START signout]
+//     firebase.auth().signOut();
+//     // [END signout]
+//   }
+//   // [START_EXCLUDE]
+//   // document.getElementById('quickstart-sign-in').disabled = true;
+//   // [END_EXCLUDE]
+// }
+// // [END buttoncallback]
 
 /**
  * initApp handles setting up UI event listeners and registering Firebase auth listeners:

@@ -41,5 +41,9 @@
         <variable name="APP_NAME" value="CityLive" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
+    <config-file parent="/resources" target="./res/values/strings.xml">
+        <string name="fb_app_id">575313776172465</string>
+        <string name="fb_app_name">CityLive</string>
+    </config-file>
     <engine name="android" spec="^7.0.0" />
 </widget>

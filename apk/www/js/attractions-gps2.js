@@ -54,6 +54,7 @@ function searchFavorites() {
     // var userLogged = firebase.auth().getUid();
     // console.log(userLogged);
     // console.log(userId);
+    clearResults();
     var userFavorites = firebase.database().ref('users/' + userId);
     // userFavorites.once('value', function(snapshot) {
     userFavorites.once('value', snapshot => {
@@ -84,8 +85,8 @@ function searchFavorites() {
 };
 
 function initMapNear() {
-    // clearResults();
-    // clearMarkers();
+    clearResults();
+    clearMarkers();
     var lat = localStorage.getItem('lat')
     var lng = localStorage.getItem('lng')
     var lokalizacja = new google.maps.LatLng(lat, lng);
@@ -143,6 +144,9 @@ function initMapNear() {
 
 // Search for hotels in the selected city, within the viewport of the map.
 function search(type) {
+
+  // clearResults();
+  // clearMarkers();
 
   console.log("Z searcha " + type);
   var search = {
