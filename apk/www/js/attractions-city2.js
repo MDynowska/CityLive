@@ -100,8 +100,8 @@ function searchFavorites() {
     // var userLogged = firebase.auth().getUid();
     // console.log(userLogged);
     // console.log(userId);
-    clearMarkers();
-    clearResults();
+    // clearMarkers();
+    // clearResults();
     var userFavorites = firebase.database().ref('users/' + userId);
     // userFavorites.once('value', function(snapshot) {
     userFavorites.once('value', snapshot => {
@@ -112,7 +112,7 @@ function searchFavorites() {
             window.location.href = 'categories.html';
         }
         console.log(favorites);
-        // clearResults();
+        clearResults();
         // clearMarkers();
         favorites.forEach(function(favorite) {
             // if (childSnapshot.val().username === 'piotrek.slawek@gmail.com') {
